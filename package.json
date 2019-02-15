@@ -8,13 +8,18 @@
   "scripts": {
     "start": "concurrently -n=client,server -c=cyan,magenta \"yarn client:start\" \"yarn server:start\"",
     "server:start": "webpack --config webpack.server.config",
-    "client:start": "webpack-dev-server --config webpack.client.config"
+    "client:start": "webpack-dev-server --config webpack.client.config",
+    "migration:generate": "sequelize migration:generate --name",
+    "migrate": "sequelize db:migrate",
+    "migrate:undo": "sequelize db:migrate:undo"
   },
   "dependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "babel-loader": "^8.0.5",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "concurrently": "^4.1.0",
@@ -23,10 +28,13 @@
     "express": "^4.16.4",
     "html-webpack-plugin": "^3.2.0",
     "http-proxy-middleware": "^0.19.1",
+    "mysql2": "^1.6.5",
     "nodemon-webpack-plugin": "^4.0.7",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "remove-webpack-plugin": "^1.2.2",
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14",

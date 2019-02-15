@@ -7,7 +7,7 @@ require('./loaded-env');
 
 module.exports = {
   mode: 'development',
-  entry: './client/index.js',
+  entry: ['@babel/polyfill', './client/index.js'],
   devtool: 'eval',
   devServer: {
     overlay: true,
