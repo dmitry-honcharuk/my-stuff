@@ -23,7 +23,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  targets: {
+                    node: true,
+                  },
+                },
+              ],
+            ],
             plugins: ['@babel/plugin-proposal-object-rest-spread'],
           },
         },
@@ -40,5 +49,5 @@ module.exports = {
     process: false,
     __filename: false,
     __dirname: false,
-  }
+  },
 };
