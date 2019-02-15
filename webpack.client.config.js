@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 require('./loaded-env');
 
@@ -14,11 +15,13 @@ module.exports = {
     historyApiFallback: true,
     contentBase: path.resolve(__dirname, 'public'),
     clientLogLevel: 'info',
+    publicPath: '/',
   },
   output: {
-    path: path.resolve(__dirname, 'static'),
-    filename: 'index.js',
-    chunkFilename: '[name].chunk.js',
+    pathinfo: true,
+    filename: 'static/index.js',
+    chunkFilename: 'static/[name].chunk.js',
+    publicPath: '/',
   },
   stats: 'minimal',
   optimization: {
@@ -44,10 +47,16 @@ module.exports = {
     ],
   },
   plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, './public'),
+        to: path.resolve(__dirname, './static'),
+        toType: 'dir',
+      },
+    ]),
     new CaseSensitivePathsPlugin(),
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
-      favicon: './public/favicon.ico',
+      template: 'public/index.html',
       inject: true,
       title: 'My stuff',
       meta: {
