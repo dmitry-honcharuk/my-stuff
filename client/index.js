@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+import App from './App';
+
 const app = document.querySelector('#app');
 
-render(<h1>App</h1>, app);
+render(<App />, app);
