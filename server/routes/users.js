@@ -25,13 +25,9 @@ router.post('/', async (req, res) => {
     password,
   });
 
-  res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true });
+  res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true, httpOnly: true });
 
   return res.json(user);
-});
-
-router.get('/', (req, res) => {
-  return res.json(req.signedCookies);
 });
 
 export default router;
