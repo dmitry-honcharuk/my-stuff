@@ -10,3 +10,7 @@ export const isEmailTaken = async email => {
 
 export const createUser = ({ email, password }) =>
   UserModel.create({ email, password });
+
+export const login = ({ email, password }) => {
+  return UserModel.findOne({ where: { email, password } });
+}
