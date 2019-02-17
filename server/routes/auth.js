@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
     return res.json(user);
 
   } catch (err) {
-    return res.status(400).send('invalid username or password');
+    return res.status(400).json({ error: 'invalid username or password' });
   }
 });
 
