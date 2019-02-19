@@ -11,13 +11,13 @@ router.post('/register', async (req, res) => {
     password,
   } = req.body;
   if (!email || !password) {
-    return res.status(401).json({ error: 'email and password are required fields' });
+    return res.status(400).json({ error: 'email and password are required fields' });
   }
 
   const isEmailTaken = await UserService.isEmailTaken(email);
 
   if (isEmailTaken) {
-    return res.status(401).json({ error: 'this email is taken' });
+    return res.status(400).json({ email: 'This email is taken' });
   }
 
   const user = await UserService.createUser({

@@ -1,7 +1,20 @@
 import React from 'react';
+import { CssBaseline } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
-import { RegisterPage } from './modules/auth';
+import Routes from './Routes';
 
-const App = () => <RegisterPage />;
+const styles = () => ({
+  root: {
+    fontFamily: 'Roboto',
+  },
+});
 
-export default App;
+const App = ({ classes }) => (
+  <div className={classes.root}>
+    <CssBaseline />
+    <Routes />
+  </div>
+);
+
+export default withStyles(styles)(App);
