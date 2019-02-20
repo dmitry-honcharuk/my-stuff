@@ -1,9 +1,17 @@
 import { Router } from 'express';
+
 import * as UserService from '../services/User';
+import withCurrentUser from '../middlewares/withCurrentUser';
 
 import { SESSION_COOKIE_NAME } from '../constants';
 
 const router = Router();
+
+router.get('/current', withCurrentUser, async (req, res) => {
+  const { user } = req;
+
+  return res.json(user);
+});
 
 router.post('/register', async (req, res) => {
   const {

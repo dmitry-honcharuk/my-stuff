@@ -8,13 +8,19 @@ import middlewares from './middlewares';
 
 import App from './App';
 
+import { initialAuth } from './modules/auth/actions';
+
 const store = createStore(reducers, middlewares);
 
 const app = document.querySelector('#app');
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  app,
-);
+(async () => {
+  await store.dispatch(initialAuth());
+
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    app,
+  );
+})();
