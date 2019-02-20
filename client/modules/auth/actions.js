@@ -31,3 +31,15 @@ export const initialAuth = () => async dispatch => {
     return dispatch({ type: INITIAL_AUTH_FAIL, payload: data });
   }
 };
+
+export const LOGOUT_SUCCESS = `${MODULE}/LOGOUT/SUCCESS`;
+export const LOGOUT_FAIL = `${MODULE}/LOGOUT/FAIL`;
+export const logout = () => async dispatch => {
+  try {
+    await axios.get('/api/auth/logout');
+
+    return dispatch({ type: LOGOUT_SUCCESS });
+  } catch ({ response: { data } }) {
+    return dispatch({ type: LOGOUT_FAIL, payload: data });
+  }
+};

@@ -5,11 +5,12 @@ import PrivateRoute from './common/PrivateRoute';
 import PublicOnlyRoute from './common/PublicOnlyRoute';
 
 import { RegistrationPage } from './modules/auth';
+import { AdminRoot } from './modules/admin';
 
 const Routes = () => (
   <Router>
     <Switch>
-      <PrivateRoute path='/' exact component={() => <h1>App</h1>} />
+      <PrivateRoute path='/' exact component={AdminRoot} />
       <PublicOnlyRoute path='/registration' exact component={RegistrationPage} />
     </Switch>
   </Router>
