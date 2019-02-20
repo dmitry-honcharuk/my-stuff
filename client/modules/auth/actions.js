@@ -19,3 +19,15 @@ export const registerUser = ({ email, password }) => async dispatch => {
     throw new SubmissionError(data);
   }
 };
+
+export const INITIAL_AUTH_SUCCESS = `${MODULE}/INITIAL_AUTH/SUCCESS`;
+export const INITIAL_AUTH_FAIL = `${MODULE}/INITIAL_AUTH/FAIL`;
+export const initialAuth = () => async dispatch => {
+  try {
+    const { data: user } = await axios.get('/api/auth/current');
+
+    return dispatch({ type: INITIAL_AUTH_SUCCESS, payload: user });
+  } catch ({ response: { data } }) {
+    return dispatch({ type: INITIAL_AUTH_FAIL, payload: data });
+  }
+};

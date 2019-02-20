@@ -13,4 +13,7 @@ export const createUser = ({ email, password }) =>
 
 export const login = ({ email, password }) => {
   return UserModel.findOne({ where: { email, password } });
-}
+};
+
+export const getUserById = id =>
+  UserModel.findByPk(id);
