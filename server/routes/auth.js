@@ -7,7 +7,13 @@ import { SESSION_COOKIE_NAME } from '../constants';
 
 const router = Router();
 
-router.get('/current', withCurrentUser, async (req, res) => {
+router.get('/logout', (req, res) => {
+  res.clearCookie(SESSION_COOKIE_NAME, { signed: true, httpOnly: true });
+
+  return res.json({});
+});
+
+router.get('/current', withCurrentUser, (req, res) => {
   const { user } = req;
 
   return res.json(user);
