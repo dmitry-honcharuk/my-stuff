@@ -21,6 +21,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "bcrypt-nodejs": "0.0.3",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "concurrently": "^4.1.0",
     "cookie-parser": "^1.4.4",

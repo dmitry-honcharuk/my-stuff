@@ -10,24 +10,30 @@ router.post('/register', async (req, res) => {
     email,
     password,
   } = req.body;
+  const isEmailTaken = await UserService.isEmailTaken(email);
+  const hashedPassword = await UserService.hashedPassword(password, 10);
+  console.log('hashedPassword', hashedPassword);
+  console.log('type is ', typeof hashedPassword);
+
   if (!email || !password) {
     return res.status(401).json({ error: 'email and password are required fields' });
   }
-
-  const isEmailTaken = await UserService.isEmailTaken(email);
 
   if (isEmailTaken) {
     return res.status(401).json({ error: 'this email is taken' });
   }
 
-  const user = await UserService.createUser({
-    email,
-    password,
-  });
+  if (hashedPassword) {
+    console.log('daaa');
+    const user = await UserService.createUser({
+      email,
+      hashedPassword,
+    });
 
-  res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true, httpOnly: true });
+    res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true, httpOnly: true });
 
-  return res.json(user);
+    return res.json(user);
+  }
 });
 
 router.post('/login', async (req, res) => {
@@ -44,6 +50,14 @@ router.post('/login', async (req, res) => {
   }
 
   try {
+    const saltRounds = 10;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    bcrypt.hash(password, salt, null).then(function(hash) {
+      // Store hash in your password DB.
+      console.log('hash', hash);
+    });
+    console.log('test', hash);
+
     const user = await UserService.login({
       email,
       password,
