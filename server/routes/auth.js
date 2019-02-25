@@ -43,14 +43,19 @@ router.post('/login', async (req, res) => {
     return res.status(401).json({ error: 'password is required field' });
   }
 
-  const user = await UserService.login({
-    email,
-    password,
-  });
+  try {
+    const user = await UserService.login({
+      email,
+      password,
+    });
 
-  res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true, httpOnly: true });
+    res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true, httpOnly: true });
 
-  return res.json(user);
+    return res.json(user);
+
+  } catch (err) {
+    return res.status(400).json({ error: 'invalid username or password' });
+  }
 });
 
 export default router;
