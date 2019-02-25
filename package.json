@@ -13,6 +13,16 @@
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
+  },
   "dependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
@@ -30,11 +40,18 @@
     "cookie-parser": "^1.4.4",
     "copy-webpack-plugin": "^4.6.0",
     "dotenv": "^6.2.0",
+    "eslint": "^5.14.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
     "express": "^4.16.4",
     "html-webpack-plugin": "^3.2.0",
     "http-proxy-middleware": "^0.19.1",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.4",
     "mysql2": "^1.6.5",
     "nodemon-webpack-plugin": "^4.0.7",
+    "prettier": "^1.16.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",

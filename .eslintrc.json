@@ -1,0 +1,73 @@
+{
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "prettier",
+    "react"
+  ],
+  "extends": [
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "all"
+      }
+    ],
+    "new-cap": [
+      "error",
+      {
+        "capIsNew": false
+      }
+    ],
+    "quotes": [
+      2,
+      "single"
+    ],
+    "no-var": "error",
+    "no-useless-catch": "error",
+    "no-useless-return": "error",
+    "no-useless-rename": "error",
+    "no-unused-expressions": "error",
+    "no-return-assign": "error",
+    "no-return-await": "error",
+    "no-shadow": "error",
+    "no-trailing-spaces": "error",
+    "no-unneeded-ternary": "error",
+    "no-use-before-define": "error",
+    "no-useless-computed-key": "error",
+    "no-useless-concat": "error",
+    "no-void": "error",
+    "no-with": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-const": "error",
+    "prefer-destructuring": [
+      "error",
+      {
+        "array": true,
+        "object": true
+      },
+      {
+        "enforceForRenamedProperties": true
+      }
+    ],
+    "prefer-object-spread": "error",
+    "prefer-promise-reject-errors": "error",
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "prefer-template": "error",
+    "require-atomic-updates": "error",
+    "require-await": "error",
+    "yoda": "error"
+  }
+}
