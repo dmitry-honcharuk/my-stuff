@@ -44,3 +44,6 @@ export const login = async ({ email, password }) => {
     return user;
   }
 };
+
+export const getUserById = id =>
+    UserModel.findByPk(id);

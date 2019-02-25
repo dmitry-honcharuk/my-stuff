@@ -1,9 +1,23 @@
 import { Router } from 'express';
+
 import * as UserService from '../services/User';
+import withCurrentUser from '../middlewares/withCurrentUser';
 
 import { SESSION_COOKIE_NAME } from '../constants';
 
 const router = Router();
+
+router.get('/logout', (req, res) => {
+  res.clearCookie(SESSION_COOKIE_NAME, { signed: true, httpOnly: true });
+
+  return res.json({});
+});
+
+router.get('/current', withCurrentUser, (req, res) => {
+  const { user } = req;
+
+  return res.json(user);
+});
 
 router.post('/register', async (req, res) => {
   const {
@@ -13,11 +27,11 @@ router.post('/register', async (req, res) => {
   const isEmailTaken = await UserService.isEmailTaken(email);
 
   if (!email || !password) {
-    return res.status(401).json({ error: 'email and password are required fields' });
+    return res.status(400).json({ error: 'email and password are required fields' });
   }
 
   if (isEmailTaken) {
-    return res.status(401).json({ error: 'this email is taken' });
+    return res.status(400).json({ email: 'This email is taken' });
   }
 
   const user = await UserService.createUser({
