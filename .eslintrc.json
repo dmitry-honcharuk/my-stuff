@@ -9,13 +9,8 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "prettier",
-    "react"
-  ],
-  "extends": [
-    "plugin:prettier/recommended"
-  ],
+  "plugins": ["prettier", "react"],
+  "extends": ["plugin:prettier/recommended"],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -30,10 +25,7 @@
         "capIsNew": false
       }
     ],
-    "quotes": [
-      2,
-      "single"
-    ],
+    "quotes": [2, "single"],
     "no-var": "error",
     "no-useless-catch": "error",
     "no-useless-return": "error",
@@ -68,6 +60,7 @@
     "prefer-template": "error",
     "require-atomic-updates": "error",
     "require-await": "error",
-    "yoda": "error"
+    "yoda": "error",
+    "no-console": ["error", { "allow": ["error", "info"] }]
   }
 }
