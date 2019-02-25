@@ -1,23 +1,38 @@
-import { Router } from 'express';
-import * as UserService from '../services/User';
+import {Router} from 'express';
 
-import { SESSION_COOKIE_NAME } from '../constants';
+import * as UserService from '../services/User';
+import withCurrentUser from '../middlewares/withCurrentUser';
+
+import {SESSION_COOKIE_NAME} from '../constants';
 
 const router = Router();
+
+router.get('/logout', (req, res) => {
+  res.clearCookie(SESSION_COOKIE_NAME, {signed: true, httpOnly: true});
+
+  return res.json({});
+});
+
+router.get('/current', withCurrentUser, (req, res) => {
+  const {user} = req;
+
+  return res.json(user);
+});
 
 router.post('/register', async (req, res) => {
   const {
     email,
     password,
   } = req.body;
-  const isEmailTaken = await UserService.isEmailTaken(email);
 
   if (!email || !password) {
-    return res.status(401).json({ error: 'email and password are required fields' });
+    return res.status(401).json({error: 'email and password are required fields'});
   }
 
+  const isEmailTaken = await UserService.isEmailTaken(email);
+
   if (isEmailTaken) {
-    return res.status(401).json({ error: 'this email is taken' });
+    return res.status(401).json({error: 'this email is taken'});
   }
 
   const user = await UserService.createUser({
@@ -25,7 +40,7 @@ router.post('/register', async (req, res) => {
     password,
   });
 
-  res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true, httpOnly: true });
+  res.cookie(SESSION_COOKIE_NAME, user.id, {signed: true, httpOnly: true});
 
   return res.json(user);
 });
@@ -36,11 +51,11 @@ router.post('/login', async (req, res) => {
     password,
   } = req.body;
   if (!email) {
-    return res.status(401).json({ error: 'email is required field' });
+    return res.status(401).json({error: 'email is required field'});
   }
 
   if (!password) {
-    return res.status(401).json({ error: 'password is required field' });
+    return res.status(401).json({error: 'password is required field'});
   }
 
   try {
@@ -49,12 +64,12 @@ router.post('/login', async (req, res) => {
       password,
     });
 
-    res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true, httpOnly: true });
+    res.cookie(SESSION_COOKIE_NAME, user.id, {signed: true, httpOnly: true});
 
     return res.json(user);
 
   } catch (err) {
-    return res.status(400).json({ error: 'invalid username or password' });
+    return res.status(401).json({error: 'invalid username or password'});
   }
 });
 
