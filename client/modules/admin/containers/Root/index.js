@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 
+import AdminPage from '../../components/AdminPage';
 import { LogoutButton } from '../../../auth';
 
 const Root = () => (
-  <Fragment>
+  <AdminPage>
     <LogoutButton />
     <h1>Admin Panel Root</h1>
-  </Fragment>
+  </AdminPage>
 );
 
 export default Root;
