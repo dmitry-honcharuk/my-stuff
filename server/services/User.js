@@ -38,7 +38,10 @@ export const createUser = async ({ email, password }) => {
 };
 
 export const login = async ({ email, password }) => {
-  const user = await UserModel.findOne({ where: { email } });
+  const user = null;
+  if(!user) {
+    throw new Error('User not found')
+  }
   const isPasswordValid = await isPasswordSame(password, user.password);
   if(isPasswordValid) {
     return user;
