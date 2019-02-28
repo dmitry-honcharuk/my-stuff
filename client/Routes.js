@@ -4,13 +4,14 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import PrivateRoute from './common/PrivateRoute';
 import PublicOnlyRoute from './common/PublicOnlyRoute';
 
-import { RegistrationPage, LoginPage } from './modules/auth';
-import { AdminRoot } from './modules/admin';
+import { LoginPage, RegistrationPage } from './modules/auth';
+import { AdminRoot, CreateProduct } from './modules/admin';
 
 const Routes = () => (
   <Router>
     <Switch>
       <PrivateRoute path="/" exact component={AdminRoot} />
+      <PrivateRoute path="/create-product" exact component={CreateProduct} />
       <PublicOnlyRoute
         path="/registration"
         exact

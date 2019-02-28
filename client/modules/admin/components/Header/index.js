@@ -15,7 +15,7 @@ const propTypes = {
 const Header = ({ title, classes }) => (
   <AppBar className={classes.root} position="fixed" color="primary">
     <Toolbar>
-      <Typography className={classes.title} variant="h6" color="inherit">
+      <Typography variant="h6" color="inherit">
         <em>{title}</em>
       </Typography>
     </Toolbar>

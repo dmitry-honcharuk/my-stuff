@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import Logo from '../../../../common/Logo';
+import Menu from '../Menu';
 
 import s from './styles';
 
@@ -14,6 +15,7 @@ const Sidebar = ({ classes }) => (
         <Logo />
       </Toolbar>
     </AppBar>
+    <Menu />
   </div>
 );
 

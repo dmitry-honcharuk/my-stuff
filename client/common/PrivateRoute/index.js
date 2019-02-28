@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route } from 'react-router-dom';
 
 import withCurrentUser from '../../utils/hoc/withCurrentUser';
 
@@ -11,7 +11,7 @@ const propTypes = {
   redirectTo: PropTypes.string,
 };
 const defaultProps = {
-  redirectTo: '/registration',
+  redirectTo: '/login',
 };
 
 const PrivateRoute = ({ user, redirectTo, ...props }) => {
