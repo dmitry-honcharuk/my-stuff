@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
-import AdminPage from '../../components/AdminPage';
+import Page from '../../components/Page';
 import { LogoutButton } from '../../../auth';
 
 const Root = () => (
-  <AdminPage>
+  <Page title="Products">
     <LogoutButton />
     <h1>Admin Panel Root</h1>
-  </AdminPage>
+  </Page>
 );
 
 export default Root;

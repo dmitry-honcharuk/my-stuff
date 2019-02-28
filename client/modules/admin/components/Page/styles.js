@@ -1,4 +1,7 @@
 export default ({ spacing, mixins }) => ({
+  page: {
+    display: 'flex',
+  },
   content: {
     // header height
     marginTop: spacing.unit * 8,
