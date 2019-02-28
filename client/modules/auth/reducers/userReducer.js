@@ -5,14 +5,13 @@ import {
   REGISTER_USER_FAIL,
   REGISTER_USER_SUCCESS,
   LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAIL
+  LOGIN_USER_FAIL,
 } from '../actions';
 
 const initialState = {};
 
-export default (state = initialState, {type, payload}) => {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
-
     case INITIAL_AUTH_SUCCESS:
     case REGISTER_USER_SUCCESS:
     case LOGIN_USER_SUCCESS:
@@ -27,4 +26,4 @@ export default (state = initialState, {type, payload}) => {
     default:
       return state;
   }
-}
+};

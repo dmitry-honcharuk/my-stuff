@@ -1,4 +1,4 @@
-export default ({spacing: {unit}}) => ({
+export default ({ spacing: { unit } }) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
