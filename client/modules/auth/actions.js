@@ -20,6 +20,23 @@ export const registerUser = ({ email, password }) => async dispatch => {
   }
 };
 
+export const LOGIN_USER_SUCCESS = `${MODULE}/LOGIN_USER/SUCCESS`;
+export const LOGIN_USER_FAIL = `${MODULE}/LOGIN_USER/FAIL`;
+export const loginUser = ({ email, password }) => async dispatch => {
+  try {
+    const { data: user } = await axios.post('/api/auth/login', {
+      email,
+      password,
+    });
+
+    return dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+  } catch ({ response: { data } }) {
+    dispatch({ type: LOGIN_USER_FAIL, payload: data });
+
+    throw new SubmissionError(data);
+  }
+};
+
 export const INITIAL_AUTH_SUCCESS = `${MODULE}/INITIAL_AUTH/SUCCESS`;
 export const INITIAL_AUTH_FAIL = `${MODULE}/INITIAL_AUTH/FAIL`;
 export const initialAuth = () => async dispatch => {
