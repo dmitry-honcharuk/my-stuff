@@ -1,12 +1,10 @@
 import React from 'react';
 
 import Page from '../../components/Page';
-import { LogoutButton } from '../../../auth';
 
 const Root = () => (
-  <Page title="Products">
-    <LogoutButton />
-    <h1>Admin Panel Root</h1>
+  <Page title="Create Product">
+    <h1>Create Product page</h1>
   </Page>
 );
 
