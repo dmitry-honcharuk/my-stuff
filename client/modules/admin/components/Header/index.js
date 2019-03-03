@@ -5,6 +5,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
+import UserDropdown from '../UserDropdown';
+
 import s from './styles';
 
 const propTypes = {
@@ -14,10 +16,11 @@ const propTypes = {
 
 const Header = ({ title, classes }) => (
   <AppBar className={classes.root} position="fixed" color="primary">
-    <Toolbar>
+    <Toolbar className={classes.toolbar}>
       <Typography variant="h6" color="inherit">
         <em>{title}</em>
       </Typography>
+      <UserDropdown />
     </Toolbar>
   </AppBar>
 );
