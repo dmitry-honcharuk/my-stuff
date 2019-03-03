@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -13,7 +14,12 @@ import UserDropdown from './UserDropdown';
 
 import s from './styles';
 
-const UserDropdownContainer = ({ logout, classes }) => {
+const propTypes = {
+  email: PropTypes.string.isRequired,
+  logout: PropTypes.func.isRequired,
+};
+
+const UserDropdownContainer = ({ email, logout, classes }) => {
   const { element, setFromEvent, dropAnchor } = useAnchorEl();
   const isOpen = Boolean(element);
 
@@ -29,7 +35,7 @@ const UserDropdownContainer = ({ logout, classes }) => {
           render: () => (
             <div className={classes.signedLabel}>
               <Typography variant="subtitle2">Signed in as</Typography>
-              <Typography>fine.ok92@gmail.com</Typography>
+              <Typography>{email}</Typography>
             </div>
           ),
         },
@@ -47,9 +53,15 @@ const UserDropdownContainer = ({ logout, classes }) => {
   );
 };
 
+UserDropdownContainer.propTypes = propTypes;
+
+const mapStateToProps = ({ auth: { user } }) => ({
+  email: user.email,
+});
+
 export default compose(
   connect(
-    null,
+    mapStateToProps,
     {
       logout: logoutAction,
     },
