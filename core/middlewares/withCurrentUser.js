@@ -1,9 +1,9 @@
-import { STATUS_CODES } from "http";
+import { STATUS_CODES } from 'http';
+
+import { SESSION_COOKIE_NAME } from '@core/constants';
+import { getUserById } from '@core/services/User';
 
 import withToken from './withToken';
-import { getUserById } from '../services/User';
-
-import { SESSION_COOKIE_NAME } from '../constants';
 
 export default [
   withToken,

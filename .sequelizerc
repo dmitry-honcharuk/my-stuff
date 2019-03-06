@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  'config': path.resolve('server', 'migrations', 'migration-setup.js'),
-  'models-path': path.resolve('server', 'models'),
-  'migrations-path': path.resolve('server', 'migrations', 'source'),
+  'config': path.resolve('core', 'migrations', 'migration-setup.js'),
+  'models-path': path.resolve('core', 'models'),
+  'migrations-path': path.resolve('core', 'migrations', 'source'),
 };

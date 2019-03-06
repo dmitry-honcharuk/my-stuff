@@ -1,5 +1,3 @@
-import { DataTypes } from 'sequelize';
-
 const TABLE_NAME = 'Users';
 
 module.exports = {
@@ -11,26 +9,26 @@ module.exports = {
         autoIncrement: true,
       },
       email: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         unique: true,
         allowNull: false,
       },
       password: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       createdAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         defaultValue: Sequelize.literal('NOW()'),
       },
       updatedAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         defaultValue: Sequelize.literal('NOW()'),
       },
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async queryInterface => {
     await queryInterface.dropTable(TABLE_NAME);
   },
 };

@@ -7,8 +7,12 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 module.exports = {
   mode: 'development',
   target: 'node',
-  entry: './server/index.js',
-  externals: [nodeExternals()],
+  entry: './core/server/index.js',
+  externals: [
+    nodeExternals({
+      whitelist: /^@core\//,
+    }),
+  ],
   watch: true,
   output: {
     path: path.resolve(__dirname, 'src'),
@@ -19,7 +23,6 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: /server/,
         use: {
           loader: 'babel-loader',
           options: {

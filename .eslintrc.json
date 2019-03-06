@@ -46,11 +46,17 @@
     "prefer-destructuring": [
       "error",
       {
-        "array": true,
-        "object": true
+        "VariableDeclarator": {
+          "array": false,
+          "object": true
+        },
+        "AssignmentExpression": {
+          "array": false,
+          "object": false
+        }
       },
       {
-        "enforceForRenamedProperties": true
+        "enforceForRenamedProperties": false
       }
     ],
     "prefer-object-spread": "error",
@@ -61,6 +67,11 @@
     "require-atomic-updates": "error",
     "require-await": "error",
     "yoda": "error",
-    "no-console": ["error", { "allow": ["error", "info"] }]
+    "no-console": [
+      "error",
+      {
+        "allow": ["error", "info"]
+      }
+    ]
   }
 }
