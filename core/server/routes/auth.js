@@ -1,9 +1,8 @@
 import { Router } from 'express';
 
-import * as UserService from '../services/User';
-import withCurrentUser from '../middlewares/withCurrentUser';
-
-import { SESSION_COOKIE_NAME } from '../constants';
+import { SESSION_COOKIE_NAME } from '@core/constants';
+import * as UserService from '@core/services/User';
+import withCurrentUser from '@core/middlewares/withCurrentUser';
 
 const router = Router();
 
@@ -20,12 +19,11 @@ router.get('/current', withCurrentUser, (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-  const {
-    email,
-    password,
-  } = req.body;
+  const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(401).json({ error: 'email and password are required fields' });
+    return res
+      .status(401)
+      .json({ error: 'email and password are required fields' });
   }
 
   const isEmailTaken = await UserService.isEmailTaken(email);
@@ -45,10 +43,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  const {
-    email,
-    password,
-  } = req.body;
+  const { email, password } = req.body;
   if (!email) {
     return res.status(401).json({ error: 'email is required field' });
   }
@@ -66,7 +61,6 @@ router.post('/login', async (req, res) => {
     res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true, httpOnly: true });
 
     return res.json(user);
-
   } catch (err) {
     return res.status(401).json({ error: 'invalid username or password' });
   }

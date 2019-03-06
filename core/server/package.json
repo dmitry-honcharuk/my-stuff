@@ -1,0 +1,15 @@
+{
+  "name": "@core/server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@core/config": "1.0.0",
+    "@core/constants": "1.0.0",
+    "@core/middlewares": "1.0.0",
+    "@core/services": "1.0.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
+    "http-proxy-middleware": "^0.19.1"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "@core/repositories",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@core/models": "1.0.0",
+    "sequelize": "^4.43.0"
+  }
+}

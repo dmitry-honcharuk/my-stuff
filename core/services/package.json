@@ -1,0 +1,10 @@
+{
+  "name": "@core/services",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@core/repositories": "1.0.0",
+    "bcrypt-nodejs": "^0.0.3"
+  }
+}
