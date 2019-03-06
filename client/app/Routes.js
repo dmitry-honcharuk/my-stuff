@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import PrivateRoute from './common/PrivateRoute';
-import PublicOnlyRoute from './common/PublicOnlyRoute';
+import PrivateRoute from '@client/common/PrivateRoute';
+import PublicOnlyRoute from '@client/common/PublicOnlyRoute';
 
-import { LoginPage, RegistrationPage } from './modules/auth';
-import { AdminRoot, CreateProduct } from './modules/admin';
+import { LoginPage, RegistrationPage } from '@client/modules/auth';
+import { AdminRoot, CreateProduct } from '@client/modules/admin';
 
 const Routes = () => (
   <Router>
