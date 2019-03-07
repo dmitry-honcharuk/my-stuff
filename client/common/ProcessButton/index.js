@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+
 import { Button, CircularProgress } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -25,7 +26,9 @@ const ProcessButton = ({ classes, inProcess, children, ...props }) => (
     {...props}
   >
     {children}
-    {inProcess && <CircularProgress size={24} color="secondary" className={classes.icon} />}
+    {inProcess && (
+      <CircularProgress size={24} color="secondary" className={classes.icon} />
+    )}
   </Button>
 );
 

@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+
+import useAnchorEl from '@client/utils/hooks/useAnchorEl';
+
 import withStyles from '@material-ui/core/styles/withStyles';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 
 import { logout as logoutAction } from '../../../auth';
-
-import useAnchorEl from '../../../../utils/hooks/useAnchorEl';
 
 import UserDropdown from './UserDropdown';
 

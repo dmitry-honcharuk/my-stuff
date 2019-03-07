@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 
-import withCurrentUser from '../../utils/hoc/withCurrentUser';
+import withCurrentUser from '@client/utils/hoc/withCurrentUser';
 
 const propTypes = {
   user: PropTypes.shape({

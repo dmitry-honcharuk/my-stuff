@@ -6,10 +6,10 @@ import { Field, reduxForm } from 'redux-form';
 import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import required from '../../../../utils/validation/required';
+import required from '@client/utils/validation/required';
 
-import FormTextField from '../../../../common/FormTextField';
-import ProcessButton from '../../../../common/ProcessButton';
+import FormTextField from '@client/common/FormTextField';
+import ProcessButton from '@client/common/ProcessButton';
 
 import { LOGIN_FORM_NAME } from '../../constants';
 
