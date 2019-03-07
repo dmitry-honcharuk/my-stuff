@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
-import { SESSION_COOKIE_NAME } from '@core/constants';
+import { SESSION } from '@core/constants';
 import * as UserService from '@core/services/User';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
 
 const router = Router();
 
 router.get('/logout', (req, res) => {
-  res.clearCookie(SESSION_COOKIE_NAME, { signed: true, httpOnly: true });
+  res.clearCookie(SESSION.COOKIE_NAME, { signed: true, httpOnly: true });
 
   return res.json({});
 });
@@ -37,7 +37,7 @@ router.post('/register', async (req, res) => {
     password,
   });
 
-  res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true, httpOnly: true });
+  res.cookie(SESSION.COOKIE_NAME, user.id, { signed: true, httpOnly: true });
 
   return res.json(user);
 });
@@ -58,7 +58,7 @@ router.post('/login', async (req, res) => {
       password,
     });
 
-    res.cookie(SESSION_COOKIE_NAME, user.id, { signed: true, httpOnly: true });
+    res.cookie(SESSION.COOKIE_NAME, user.id, { signed: true, httpOnly: true });
 
     return res.json(user);
   } catch (err) {

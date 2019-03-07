@@ -1,1 +1,2 @@
-export const SESSION_COOKIE_NAME = 'ms-session-token';
+export { default as SESSION } from './session';
+export { default as USER_ROLES } from './userRoles';
