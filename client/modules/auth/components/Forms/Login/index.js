@@ -11,11 +11,11 @@ import required from '@client/utils/validation/required';
 import FormTextField from '@client/common/FormTextField';
 import ProcessButton from '@client/common/ProcessButton';
 
-import { REGISTRATION_FORM_NAME } from '../../constants';
+import { LOGIN_FORM_NAME } from '../../../constants';
 
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 
-import s from './styles';
+import s from '../styles';
 
 const requiredEmail = required('Email');
 const requiredPassword = required('Password');
@@ -23,23 +23,18 @@ const requiredPassword = required('Password');
 const propTypes = {
   classes: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  registerUser: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
 };
 const defaultProps = {
   submitting: false,
 };
 
-const RegistrationForm = ({
-  classes,
-  submitting,
-  handleSubmit,
-  registerUser,
-}) => (
+const LoginForm = ({ classes, submitting, handleSubmit, loginUser }) => (
   <div className={classes.container}>
-    <form onSubmit={handleSubmit(registerUser)} className={classes.form}>
+    <form onSubmit={handleSubmit(loginUser)} className={classes.form}>
       <Typography component="h4" variant="h4" align="center">
-        Registration
+        Sign In
       </Typography>
       <Field
         label="Email"
@@ -64,25 +59,25 @@ const RegistrationForm = ({
           color="primary"
           type="submit"
         >
-          Register
+          Sign in
         </ProcessButton>
       </div>
     </form>
   </div>
 );
 
-RegistrationForm.propTypes = propTypes;
-RegistrationForm.defaultProps = defaultProps;
+LoginForm.propTypes = propTypes;
+LoginForm.defaultProps = defaultProps;
 
 export default compose(
   connect(
     null,
     {
-      registerUser: actions.registerUser,
+      loginUser: actions.loginUser,
     },
   ),
   reduxForm({
-    form: REGISTRATION_FORM_NAME,
+    form: LOGIN_FORM_NAME,
   }),
   withStyles(s),
-)(RegistrationForm);
+)(LoginForm);
