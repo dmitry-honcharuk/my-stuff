@@ -34,7 +34,7 @@ const LoginForm = ({ classes, submitting, handleSubmit, loginUser }) => (
   <div className={classes.container}>
     <form onSubmit={handleSubmit(loginUser)} className={classes.form}>
       <Typography component="h4" variant="h4" align="center">
-        Registration
+        Login
       </Typography>
       <Field
         label="Email"
