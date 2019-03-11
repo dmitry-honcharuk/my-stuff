@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { SESSION } from '@core/constants';
 import * as UserService from '@core/services/User';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
-import { COOKIE_SECRET } from '@core/config';
+import { TOKEN_SECRET } from '@core/config';
 import { sign } from 'jsonwebtoken';
 
 const router = Router();
@@ -38,7 +38,7 @@ router.post('/register', async (req, res) => {
     email,
     password,
   });
-  const token = sign({ user: user.id }, COOKIE_SECRET, {
+  const token = sign({ user: user.id }, TOKEN_SECRET, {
     expiresIn: 24 * 60 * 60,
   });
   res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
