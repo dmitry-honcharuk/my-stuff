@@ -23,7 +23,7 @@ export const hashPassword = (pass, saltRounds) => {
   });
 };
 
-export const verifyToken = async token => {
+export const verifyToken = token => {
   return new Promise((resolve, reject) => {
     verify(token, TOKEN_SECRET, (err, decodedToken) => {
       if (err) {

@@ -1,7 +1,7 @@
 import { STATUS_CODES } from 'http';
 
 import { SESSION } from '@core/constants';
-import { getUserById } from '@core/services/User';
+import { getUserById, verifyToken } from '@core/services/User';
 
 import withToken from './withToken';
 
@@ -9,7 +9,8 @@ export default [
   withToken,
   async (req, res, next) => {
     const { token } = req;
-    const id = +token.userId;
+    const verifiedToken = await verifyToken(token);
+    const id = +verifiedToken.userId;
     const user = await getUserById(id);
 
     if (!user) {
