@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import { SESSION } from '@core/constants';
 import * as UserService from '@core/services/User';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
@@ -38,7 +37,7 @@ router.post('/register', async (req, res) => {
     email,
     password,
   });
-  const token = sign({ user: user.id }, TOKEN_SECRET, {
+  const token = sign({ userId: user.id, test: 'test' }, TOKEN_SECRET, {
     expiresIn: 24 * 60 * 60,
   });
   res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
@@ -62,7 +61,10 @@ router.post('/login', async (req, res) => {
       password,
     });
 
-    res.cookie(SESSION.COOKIE_NAME, user.id, { signed: true, httpOnly: true });
+    const token = sign({ userId: user.id }, TOKEN_SECRET, {
+      expiresIn: 24 * 60 * 60,
+    });
+    res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
     return res.json(user);
   } catch (err) {

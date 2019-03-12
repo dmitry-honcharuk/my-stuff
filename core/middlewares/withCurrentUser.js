@@ -9,9 +9,7 @@ export default [
   withToken,
   async (req, res, next) => {
     const { token } = req;
-
-    const id = +token;
-
+    const id = +token.userId;
     const user = await getUserById(id);
 
     if (!user) {
