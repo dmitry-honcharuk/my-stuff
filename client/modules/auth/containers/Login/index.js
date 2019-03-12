@@ -1,14 +1,11 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 
-import LoginForm from '../../components/LoginForm';
+import Page from '../../components/Page';
+import LoginForm from '../../components/Forms/Login';
+import { LoginGreetingScreen } from '../../components/GreetingScreen';
 
-import s from './styles';
-
-const Login = ({ classes }) => (
-  <div className={classes.root}>
-    <LoginForm />
-  </div>
+const Login = () => (
+  <Page left={<LoginGreetingScreen />} right={<LoginForm />} />
 );
 
-export default withStyles(s)(Login);
+export default Login;

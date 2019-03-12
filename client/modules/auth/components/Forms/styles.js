@@ -1,16 +1,17 @@
-export default ({ spacing: { unit }, breakpoints }) => ({
+export default ({ spacing: { unit } }) => ({
   container: {
-    width: '90%',
-    [breakpoints.up('sm')]: {
-      width: '60%',
-    },
-    [breakpoints.up('md')]: {
-      width: '40%',
-    },
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
   },
   form: {
+    width: '80%',
+    maxWidth: 500,
     display: 'flex',
     flexDirection: 'column',
+    position: 'relative',
+    top: -20,
   },
   actions: {
     marginTop: unit,

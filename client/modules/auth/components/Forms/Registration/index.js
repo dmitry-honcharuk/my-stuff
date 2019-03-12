@@ -11,11 +11,11 @@ import required from '@client/utils/validation/required';
 import FormTextField from '@client/common/FormTextField';
 import ProcessButton from '@client/common/ProcessButton';
 
-import { REGISTRATION_FORM_NAME } from '../../constants';
+import { REGISTRATION_FORM_NAME } from '../../../constants';
 
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 
-import s from './styles';
+import s from '../styles';
 
 const requiredEmail = required('Email');
 const requiredPassword = required('Password');
@@ -39,7 +39,7 @@ const RegistrationForm = ({
   <div className={classes.container}>
     <form onSubmit={handleSubmit(registerUser)} className={classes.form}>
       <Typography component="h4" variant="h4" align="center">
-        Registration
+        Sign up
       </Typography>
       <Field
         label="Email"
@@ -64,7 +64,7 @@ const RegistrationForm = ({
           color="primary"
           type="submit"
         >
-          Register
+          Sign up
         </ProcessButton>
       </div>
     </form>

@@ -11,11 +11,11 @@ import required from '@client/utils/validation/required';
 import FormTextField from '@client/common/FormTextField';
 import ProcessButton from '@client/common/ProcessButton';
 
-import { LOGIN_FORM_NAME } from '../../constants';
+import { LOGIN_FORM_NAME } from '../../../constants';
 
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 
-import s from './styles';
+import s from '../styles';
 
 const requiredEmail = required('Email');
 const requiredPassword = required('Password');
@@ -34,7 +34,7 @@ const LoginForm = ({ classes, submitting, handleSubmit, loginUser }) => (
   <div className={classes.container}>
     <form onSubmit={handleSubmit(loginUser)} className={classes.form}>
       <Typography component="h4" variant="h4" align="center">
-        Login
+        Sign In
       </Typography>
       <Field
         label="Email"
@@ -59,7 +59,7 @@ const LoginForm = ({ classes, submitting, handleSubmit, loginUser }) => (
           color="primary"
           type="submit"
         >
-          Login
+          Sign in
         </ProcessButton>
       </div>
     </form>
