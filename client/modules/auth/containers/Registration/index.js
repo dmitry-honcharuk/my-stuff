@@ -1,14 +1,11 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 
-import RegistrationForm from '../../components/RegistrationForm';
+import Page from '../../components/Page';
+import RegistrationForm from '../../components/Forms/Registration';
+import { RegisterGreetingScreen } from '../../components/GreetingScreen';
 
-import s from './styles';
-
-const Register = ({ classes }) => (
-  <div className={classes.root}>
-    <RegistrationForm />
-  </div>
+const Register = () => (
+  <Page left={<RegisterGreetingScreen />} right={<RegistrationForm />} />
 );
 
-export default withStyles(s)(Register);
+export default Register;
