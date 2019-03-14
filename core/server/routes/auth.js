@@ -37,13 +37,13 @@ router.post(
       return res.status(401).json({ email: 'This email is taken' });
     }
 
-  const user = await UserService.createUser({
-    email,
-    password,
-  });
-  const token = createToken({ id: user.id, email });
+    const user = await UserService.createUser({
+      email,
+      password,
+    });
+    const token = createToken({ id: user.id, email });
 
-  res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
+    res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
     return res.json(user);
   },
@@ -63,9 +63,9 @@ router.post(
         password,
       });
 
-    const token = createToken({ id: user.id, email });
+      const token = createToken({ id: user.id, email });
 
-    res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
+      res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
       return res.json(user);
     } catch (err) {

@@ -9,9 +9,10 @@ export default [
   withToken,
   async (req, res, next) => {
     const { token } = req;
+
     try {
-      const verifiedToken = await verifyToken(token);
-      req.user = verifiedToken;
+      req.user = await verifyToken(token);
+
       return next();
     } catch (err) {
       res.clearCookie(SESSION.COOKIE_NAME, { signed: true, httpOnly: true });
