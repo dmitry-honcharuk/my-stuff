@@ -1,8 +1,11 @@
-export default ({ spacing: { unit } }) => ({
+import { darken } from '@material-ui/core/styles/colorManipulator';
+
+export default ({ spacing: { unit }, palette }) => ({
   container: {
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
     height: '100%',
   },
   form: {
@@ -11,7 +14,21 @@ export default ({ spacing: { unit } }) => ({
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
-    top: -20,
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
+  linkWrapper: {
+    height: 50,
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    justifyContent: 'center',
+    fontWeight: 100,
+  },
+  link: {
+    marginLeft: 5,
+    color: darken(palette.primary.main, 0.4),
+    fontWeight: 'normal',
   },
   actions: {
     marginTop: unit,
