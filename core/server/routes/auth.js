@@ -1,7 +1,7 @@
 import { Router } from 'express';
-
 import { SESSION } from '@core/constants';
 import * as UserService from '@core/services/User';
+import { createToken } from '@core/services/Auth';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
 import {
   withRequiredEmailField,
@@ -41,8 +41,9 @@ router.post(
       email,
       password,
     });
+    const token = createToken({ id: user.id, email });
 
-    res.cookie(SESSION.COOKIE_NAME, user.id, { signed: true, httpOnly: true });
+    res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
     return res.json(user);
   },
@@ -62,10 +63,9 @@ router.post(
         password,
       });
 
-      res.cookie(SESSION.COOKIE_NAME, user.id, {
-        signed: true,
-        httpOnly: true,
-      });
+      const token = createToken({ id: user.id, email });
+
+      res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
       return res.json(user);
     } catch (err) {

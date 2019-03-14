@@ -1,6 +1,12 @@
 import './loaded-env';
 
-export const { PORT, WDS_PORT, SITE_HOST, COOKIE_SECRET } = process.env;
+export const {
+  PORT,
+  WDS_PORT,
+  SITE_HOST,
+  COOKIE_SECRET,
+  TOKEN_SECRET,
+} = process.env;
 
 const { DB_USER, DB_PASS, DB_NAME, DB_HOST } = process.env;
 

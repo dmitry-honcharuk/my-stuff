@@ -1,7 +1,7 @@
 import { STATUS_CODES } from 'http';
 
 import { SESSION } from '@core/constants';
-import { getUserById } from '@core/services/User';
+import { verifyToken } from '@core/services/Auth';
 
 import withToken from './withToken';
 
@@ -10,16 +10,13 @@ export default [
   async (req, res, next) => {
     const { token } = req;
 
-    const id = +token;
+    try {
+      req.user = await verifyToken(token);
 
-    const user = await getUserById(id);
-
-    if (!user) {
+      return next();
+    } catch (err) {
       res.clearCookie(SESSION.COOKIE_NAME, { signed: true, httpOnly: true });
       return res.status(401).json({ error: STATUS_CODES[401] });
     }
-
-    req.user = user;
-    next();
   },
 ];

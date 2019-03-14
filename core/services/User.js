@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt-nodejs';
-
 import { UserRepository } from '@core/repositories';
 
 export const isEmailTaken = async email => {
