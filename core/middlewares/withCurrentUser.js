@@ -12,7 +12,7 @@ export default [
     try {
       const verifiedToken = await verifyToken(token);
       req.user = verifiedToken;
-      next();
+      return next();
     } catch (err) {
       res.clearCookie(SESSION.COOKIE_NAME, { signed: true, httpOnly: true });
       return res.status(401).json({ error: STATUS_CODES[401] });

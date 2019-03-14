@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { SESSION } from '@core/constants';
 import * as UserService from '@core/services/User';
-import * as TokenService from '@core/services/Auth';
+import { createToken } from '@core/services/Auth';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
 
 const router = Router();
