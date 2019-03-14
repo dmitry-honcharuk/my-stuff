@@ -9,7 +9,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["prettier", "react"],
+  "plugins": ["prettier", "react", "react-hooks"],
   "extends": ["plugin:prettier/recommended"],
   "rules": {
     "prettier/prettier": [
@@ -72,6 +72,8 @@
       {
         "allow": ["error", "info"]
       }
-    ]
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
