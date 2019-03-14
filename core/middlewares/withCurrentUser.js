@@ -10,15 +10,11 @@ export default [
   async (req, res, next) => {
     const { token } = req;
     const verifiedToken = await verifyToken(token);
-    const id = +verifiedToken.userId;
-    const user = await getUserById(id);
-
-    if (!user) {
+    if (!verifiedToken) {
       res.clearCookie(SESSION.COOKIE_NAME, { signed: true, httpOnly: true });
       return res.status(401).json({ error: STATUS_CODES[401] });
     }
-
-    req.user = user;
+    req.user = verifiedToken;
     next();
   },
 ];

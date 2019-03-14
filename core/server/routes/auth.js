@@ -37,7 +37,7 @@ router.post('/register', async (req, res) => {
     email,
     password,
   });
-  const token = sign({ userId: user.id }, TOKEN_SECRET, {
+  const token = sign({ userId: user.id, email, password }, TOKEN_SECRET, {
     expiresIn: 24 * 60 * 60,
   });
   res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
       password,
     });
 
-    const token = sign({ userId: user.id }, TOKEN_SECRET, {
+    const token = sign({ userId: user.id, email, password }, TOKEN_SECRET, {
       expiresIn: 24 * 60 * 60,
     });
     res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
