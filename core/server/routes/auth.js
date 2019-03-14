@@ -3,6 +3,11 @@ import { SESSION } from '@core/constants';
 import * as UserService from '@core/services/User';
 import { createToken } from '@core/services/Auth';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
+import {
+  withRequiredEmailField,
+  withRequiredPasswordField,
+  respondIfError,
+} from '@core/middlewares/validation';
 
 const router = Router();
 
@@ -18,55 +23,55 @@ router.get('/current', withCurrentUser, (req, res) => {
   return res.json(user);
 });
 
-router.post('/register', async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res
-      .status(401)
-      .json({ error: 'email and password are required fields' });
-  }
+router.post(
+  '/register',
+  withRequiredEmailField,
+  withRequiredPasswordField,
+  respondIfError,
+  async (req, res) => {
+    const { email, password } = req.body;
 
-  const isEmailTaken = await UserService.isEmailTaken(email);
+    const isEmailTaken = await UserService.isEmailTaken(email);
 
-  if (isEmailTaken) {
-    return res.status(401).json({ email: 'This email is taken' });
-  }
+    if (isEmailTaken) {
+      return res.status(401).json({ email: 'This email is taken' });
+    }
 
   const user = await UserService.createUser({
     email,
     password,
   });
-  const token = TokenService.createToken({ id: user.id, email });
+  const token = createToken({ id: user.id, email });
 
   res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
-  return res.json(user);
-});
+    return res.json(user);
+  },
+);
 
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  if (!email) {
-    return res.status(401).json({ error: 'email is required field' });
-  }
+router.post(
+  '/login',
+  withRequiredEmailField,
+  withRequiredPasswordField,
+  respondIfError,
+  async (req, res) => {
+    const { email, password } = req.body;
 
-  if (!password) {
-    return res.status(401).json({ error: 'password is required field' });
-  }
+    try {
+      const user = await UserService.login({
+        email,
+        password,
+      });
 
-  try {
-    const user = await UserService.login({
-      email,
-      password,
-    });
-
-    const token = TokenService.createToken({ id: user.id, email });
+    const token = createToken({ id: user.id, email });
 
     res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
-    return res.json(user);
-  } catch (err) {
-    return res.status(401).json({ error: 'invalid username or password' });
-  }
-});
+      return res.json(user);
+    } catch (err) {
+      return res.status(401).json({ error: 'invalid username or password' });
+    }
+  },
+);
 
 export default router;

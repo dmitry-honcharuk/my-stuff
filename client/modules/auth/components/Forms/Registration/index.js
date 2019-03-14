@@ -16,6 +16,7 @@ import { REGISTRATION_FORM_NAME } from '../../../constants';
 import * as actions from '../../../actions';
 
 import s from '../styles';
+import { Link } from 'react-router-dom';
 
 const requiredEmail = required('Email');
 const requiredPassword = required('Password');
@@ -68,6 +69,12 @@ const RegistrationForm = ({
         </ProcessButton>
       </div>
     </form>
+    <div className={classes.linkWrapper}>
+      Already have an account?
+      <Link to="/login" className={classes.link}>
+        Sign In
+      </Link>
+    </div>
   </div>
 );
 
