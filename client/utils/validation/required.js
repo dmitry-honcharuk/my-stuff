@@ -1,5 +1,5 @@
 export default fieldName => value => {
   if (!value) {
-    return `${fieldName} is required`;
+    return `${fieldName} is required field`;
   }
 };
