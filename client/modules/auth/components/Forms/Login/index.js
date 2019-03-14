@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Field, reduxForm } from 'redux-form';
@@ -63,6 +64,12 @@ const LoginForm = ({ classes, submitting, handleSubmit, loginUser }) => (
         </ProcessButton>
       </div>
     </form>
+    <div className={classes.linkWrapper}>
+      Don’t have an account?
+      <Link to="/registration" className={classes.link}>
+        Sign Up
+      </Link>
+    </div>
   </div>
 );
 
