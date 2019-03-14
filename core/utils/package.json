@@ -1,10 +1,9 @@
 {
-  "name": "@core/models",
+  "name": "@core/utils",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@core/config": "1.0.0",
-    "sequelize": "^5.1.0"
+    "@core/models": "1.0.0"
   }
 }
