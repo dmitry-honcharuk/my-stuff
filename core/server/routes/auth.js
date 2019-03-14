@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import { SESSION } from '@core/constants';
 import * as UserService from '@core/services/User';
+import * as TokenService from '@core/services/Auth';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
-import { TOKEN_SECRET } from '@core/config';
-import { sign } from 'jsonwebtoken';
 
 const router = Router();
 
@@ -37,9 +36,8 @@ router.post('/register', async (req, res) => {
     email,
     password,
   });
-  const token = sign({ userId: user.id, email, password }, TOKEN_SECRET, {
-    expiresIn: 24 * 60 * 60,
-  });
+  const token = TokenService.createToken({ id: user.id, email });
+
   res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
   return res.json(user);
@@ -61,9 +59,8 @@ router.post('/login', async (req, res) => {
       password,
     });
 
-    const token = sign({ userId: user.id, email, password }, TOKEN_SECRET, {
-      expiresIn: 24 * 60 * 60,
-    });
+    const token = TokenService.createToken({ id: user.id, email });
+
     res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
     return res.json(user);

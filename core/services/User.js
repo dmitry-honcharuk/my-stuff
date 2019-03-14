@@ -1,6 +1,4 @@
 import bcrypt from 'bcrypt-nodejs';
-import { verify } from 'jsonwebtoken';
-import { TOKEN_SECRET } from '@core/config';
 import { UserRepository } from '@core/repositories';
 
 export const isEmailTaken = async email => {
@@ -19,17 +17,6 @@ export const hashPassword = (pass, saltRounds) => {
         return reject(err);
       }
       return resolve(hash);
-    });
-  });
-};
-
-export const verifyToken = token => {
-  return new Promise((resolve, reject) => {
-    verify(token, TOKEN_SECRET, (err, decodedToken) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(decodedToken);
     });
   });
 };
