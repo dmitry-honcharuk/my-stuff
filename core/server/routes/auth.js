@@ -6,6 +6,7 @@ import withCurrentUser from '@core/middlewares/withCurrentUser';
 import {
   withRequiredEmailField,
   withRequiredPasswordField,
+  withPasswordConfirmation,
   respondIfError,
 } from '@core/middlewares/validation';
 
@@ -26,7 +27,7 @@ router.get('/current', withCurrentUser, (req, res) => {
 router.post(
   '/register',
   withRequiredEmailField,
-  withRequiredPasswordField,
+  withPasswordConfirmation,
   respondIfError,
   async (req, res) => {
     const { email, password } = req.body;
