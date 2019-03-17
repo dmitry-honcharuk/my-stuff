@@ -31,7 +31,14 @@ const defaultProps = {
   submitting: false,
 };
 
-const LoginForm = ({ classes, submitting, handleSubmit, loginUser }) => (
+const LoginForm = ({
+  classes,
+  submitting,
+  handleSubmit,
+  loginUser,
+  anyTouched,
+  error,
+}) => (
   <div className={classes.container}>
     <form onSubmit={handleSubmit(loginUser)} className={classes.form}>
       <Typography component="h4" variant="h4" align="center">
@@ -63,6 +70,11 @@ const LoginForm = ({ classes, submitting, handleSubmit, loginUser }) => (
           Sign in
         </ProcessButton>
       </div>
+      {anyTouched && error && (
+        <div className={classes.errorWrapper}>
+          <span className={classes.error}>{error}</span>
+        </div>
+      )}
     </form>
     <div className={classes.linkWrapper}>
       Don’t have an account?

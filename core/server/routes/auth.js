@@ -4,10 +4,11 @@ import * as UserService from '@core/services/User';
 import { createToken } from '@core/services/Auth';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
 import {
+  respondIfError,
+  withNotTakenEmail,
+  withPasswordConfirmation,
   withRequiredEmailField,
   withRequiredPasswordField,
-  withPasswordConfirmation,
-  respondIfError,
 } from '@core/middlewares/validation';
 
 const router = Router();
@@ -27,16 +28,11 @@ router.get('/current', withCurrentUser, (req, res) => {
 router.post(
   '/register',
   withRequiredEmailField,
+  withNotTakenEmail,
   withPasswordConfirmation,
   respondIfError,
   async (req, res) => {
     const { email, password } = req.body;
-
-    const isEmailTaken = await UserService.isEmailTaken(email);
-
-    if (isEmailTaken) {
-      return res.status(401).json({ email: 'This email is taken' });
-    }
 
     const user = await UserService.createUser({
       email,
@@ -70,7 +66,7 @@ router.post(
 
       return res.json(user);
     } catch (err) {
-      return res.status(401).json({ error: 'invalid username or password' });
+      return res.status(401).json({ error: 'Invalid username or password' });
     }
   },
 );

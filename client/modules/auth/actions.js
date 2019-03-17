@@ -1,22 +1,22 @@
 import axios from 'axios';
 import { SubmissionError } from 'redux-form';
 
+import getErrors from '@client/utils/helpers/getErrors';
+
 const MODULE = 'AUTH';
 
 export const REGISTER_USER_SUCCESS = `${MODULE}/REGISTER_USER/SUCCESS`;
 export const REGISTER_USER_FAIL = `${MODULE}/REGISTER_USER/FAIL`;
-export const registerUser = ({ email, password }) => async dispatch => {
+export const registerUser = formValues => async dispatch => {
   try {
-    const { data: user } = await axios.post('/api/auth/register', {
-      email,
-      password,
-    });
+    const { data: user } = await axios.post('/api/auth/register', formValues);
 
     return dispatch({ type: REGISTER_USER_SUCCESS, payload: user });
   } catch ({ response: { data } }) {
-    dispatch({ type: REGISTER_USER_FAIL, payload: data });
+    const errors = getErrors(data);
 
-    throw new SubmissionError(data);
+    dispatch({ type: REGISTER_USER_FAIL, payload: errors });
+    throw new SubmissionError(errors);
   }
 };
 
@@ -31,9 +31,10 @@ export const loginUser = ({ email, password }) => async dispatch => {
 
     return dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
   } catch ({ response: { data } }) {
-    dispatch({ type: LOGIN_USER_FAIL, payload: data });
+    const errors = getErrors(data);
 
-    throw new SubmissionError(data);
+    dispatch({ type: LOGIN_USER_FAIL, payload: errors });
+    throw new SubmissionError(errors);
   }
 };
 

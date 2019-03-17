@@ -45,4 +45,14 @@ export default ({ spacing: { unit }, palette }) => ({
   loadingIcon: {
     marginRight: 10,
   },
+  errorWrapper: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  error: {
+    position: 'absolute',
+    top: 10,
+    color: palette.error.main,
+  },
 });

@@ -9,7 +9,7 @@ export const withRequiredPasswordField = body(PASSWORD)
 
 export const withRequiredPasswordConfirmationField = body(PASSWORD_CONFIRM)
   .exists()
-  .withMessage('Confirm Password is required field');
+  .withMessage('Password confirmation is required field');
 
 export const withPasswordConfirmation = [
   withRequiredPasswordField,

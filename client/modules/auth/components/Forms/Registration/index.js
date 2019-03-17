@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 
 const requiredEmail = required('Email');
 const requiredPassword = required('Password');
+const requiredConfirmation = required('Password confirmation');
 
 const propTypes = {
   classes: PropTypes.object.isRequired,
@@ -36,6 +37,8 @@ const RegistrationForm = ({
   submitting,
   handleSubmit,
   registerUser,
+  anyTouched,
+  error,
 }) => (
   <div className={classes.container}>
     <form onSubmit={handleSubmit(registerUser)} className={classes.form}>
@@ -58,6 +61,14 @@ const RegistrationForm = ({
         validate={[requiredPassword]}
         component={FormTextField}
       />
+      <Field
+        label="Confirm Password"
+        type="password"
+        name="passwordConfirm"
+        margin="dense"
+        validate={[requiredConfirmation]}
+        component={FormTextField}
+      />
       <div className={classes.actions}>
         <ProcessButton
           inProcess={submitting}
@@ -68,6 +79,11 @@ const RegistrationForm = ({
           Sign up
         </ProcessButton>
       </div>
+      {anyTouched && error && (
+        <div className={classes.errorWrapper}>
+          <span className={classes.error}>{error}</span>
+        </div>
+      )}
     </form>
     <div className={classes.linkWrapper}>
       Already have an account?
