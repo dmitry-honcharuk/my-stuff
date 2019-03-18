@@ -5,6 +5,17 @@ export default class Repository {
     this.model = model;
   }
 
+  getModel() {
+    return this.model;
+  }
+
+  /**
+   * @returns {Promise<Model[]>}
+   */
+  findAll(...params) {
+    return this.model.findAll(...params);
+  }
+
   /**
    * @returns {Promise<Model>}
    */

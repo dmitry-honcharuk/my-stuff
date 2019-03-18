@@ -1,5 +1,12 @@
 import bcrypt from 'bcrypt-nodejs';
-import { UserRepository } from '@core/repositories';
+
+import { USER_ROLES } from '@core/constants';
+import { dbTransaction } from '@core/utils';
+import {
+  RoleRepository,
+  UserRepository,
+  UserRoleRepository,
+} from '@core/repositories';
 
 export const isEmailTaken = async email => {
   const usersCount = await UserRepository.count({
@@ -32,9 +39,37 @@ export const isPasswordSame = (pass, encryptedPass) => {
   });
 };
 
-export const createUser = async ({ email, password }) => {
+export const createUser = async ({
+  email,
+  password,
+  role = USER_ROLES.SELLER,
+}) => {
   const hashedPassword = await hashPassword(password, 10);
-  return UserRepository.create({ email, password: hashedPassword });
+  const { id: roleId } = await RoleRepository.findOne({
+    attributes: ['id'],
+    where: {
+      name: role,
+    },
+  });
+
+  return dbTransaction(async transaction => {
+    const user = await UserRepository.create(
+      {
+        email,
+        password: hashedPassword,
+      },
+      { transaction },
+    );
+
+    await UserRoleRepository.create(
+      {
+        UserId: user.id,
+        RoleId: roleId,
+      },
+      { transaction },
+    );
+    return user;
+  });
 };
 
 export const login = async ({ email, password }) => {
@@ -48,4 +83,41 @@ export const login = async ({ email, password }) => {
   }
 };
 
-export const getUserById = id => UserRepository.findByPk(id);
+export const getUser = (id, query = {}) =>
+  UserRepository.findOne({
+    where: {
+      id,
+    },
+    ...query,
+  });
+
+export const getUserRoles = async userId => {
+  const roles = await RoleRepository.findAll({
+    attributes: ['name'],
+    include: [
+      {
+        model: UserRepository.getModel(),
+        where: {
+          id: userId,
+        },
+      },
+    ],
+  });
+
+  return roles.map(({ name }) => name);
+};
+
+export const serializeUser = async userId => {
+  const [user, roles] = await Promise.all([
+    getUser(userId, {
+      attributes: ['email'],
+    }),
+    getUserRoles(userId),
+  ]);
+
+  return {
+    id: userId,
+    email: user.email,
+    roles,
+  };
+};

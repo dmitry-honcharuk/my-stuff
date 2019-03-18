@@ -11,7 +11,9 @@ export default [
     const { token } = req;
 
     try {
-      req.user = await verifyToken(token);
+      const { user } = await verifyToken(token);
+
+      req.user = user;
 
       return next();
     } catch (err) {

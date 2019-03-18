@@ -38,11 +38,14 @@ router.post(
       email,
       password,
     });
-    const token = createToken({ id: user.id, email });
+
+    const serializedUser = await UserService.serializeUser(user.id);
+
+    const token = createToken({ user: serializedUser });
 
     res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
-    return res.json(user);
+    return res.json(serializedUser);
   },
 );
 
@@ -60,13 +63,15 @@ router.post(
         password,
       });
 
-      const token = createToken({ id: user.id, email });
+      const serializedUser = await UserService.serializeUser(user.id);
+
+      const token = createToken({ user: serializedUser });
 
       res.cookie(SESSION.COOKIE_NAME, token, { signed: true, httpOnly: true });
 
-      return res.json(user);
+      return res.json(serializedUser);
     } catch (err) {
-      return res.status(401).json({ error: 'Invalid username or password' });
+      return res.status(400).json({ error: 'Invalid username or password' });
     }
   },
 );
