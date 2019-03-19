@@ -6,6 +6,6 @@ import productRoutes from './product';
 const router = Router();
 
 router.use('/auth', authRoutes);
-router.use('/product', productRoutes);
+router.use('/products', productRoutes);
 
 export default router;
