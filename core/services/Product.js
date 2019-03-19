@@ -6,3 +6,6 @@ export const createProduct = ({ name, description, userId }) =>
     description,
     UserId: userId,
   });
+
+export const deleteProductById = id =>
+  ProductRepository.destroy({ where: { id } });
