@@ -6,6 +6,7 @@
   "dependencies": {
     "@core/constants": "1.0.0",
     "@core/services": "1.0.0",
+    "@core/utils": "1.0.0",
     "express-validator": "^5.3.1"
   }
 }
