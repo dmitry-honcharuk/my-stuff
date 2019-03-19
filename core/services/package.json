@@ -7,6 +7,7 @@
     "@core/constants": "1.0.0",
     "@core/repositories": "1.0.0",
     "@core/utils": "1.0.0",
-    "bcrypt-nodejs": "^0.0.3"
+    "bcrypt-nodejs": "^0.0.3",
+    "sequelize": "^5.1.0"
   }
 }

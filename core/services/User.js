@@ -8,6 +8,8 @@ import {
   UserRoleRepository,
 } from '@core/repositories';
 
+import { getUserPermissions } from './Permissions';
+
 export const isEmailTaken = async email => {
   const usersCount = await UserRepository.count({
     where: { email },
@@ -108,16 +110,18 @@ export const getUserRoles = async userId => {
 };
 
 export const serializeUser = async userId => {
-  const [user, roles] = await Promise.all([
+  const [user, roles, permissions] = await Promise.all([
     getUser(userId, {
       attributes: ['email'],
     }),
     getUserRoles(userId),
+    getUserPermissions(userId),
   ]);
 
   return {
     id: userId,
     email: user.email,
     roles,
+    permissions,
   };
 };
