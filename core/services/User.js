@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import bcrypt from 'bcrypt-nodejs';
 
 import { USER_ROLES } from '@core/constants';
@@ -44,13 +45,15 @@ export const isPasswordSame = (pass, encryptedPass) => {
 export const createUser = async ({
   email,
   password,
-  role = USER_ROLES.SELLER,
+  roles: rolesList = [USER_ROLES.SELLER],
 }) => {
   const hashedPassword = await hashPassword(password, 10);
-  const { id: roleId } = await RoleRepository.findOne({
+  const roles = await RoleRepository.findAll({
     attributes: ['id'],
     where: {
-      name: role,
+      name: {
+        [Op.in]: rolesList,
+      },
     },
   });
 
@@ -63,11 +66,11 @@ export const createUser = async ({
       { transaction },
     );
 
-    await UserRoleRepository.create(
-      {
+    await UserRoleRepository.bulkCreate(
+      roles.map(({ id }) => ({
         UserId: user.id,
-        RoleId: roleId,
-      },
+        RoleId: id,
+      })),
       { transaction },
     );
     return user;
