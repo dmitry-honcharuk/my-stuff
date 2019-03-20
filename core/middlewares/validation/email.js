@@ -5,7 +5,10 @@ import { isEmailTaken } from '@core/services/User';
 const EMAIL_FIELD = 'email';
 
 export const withRequiredEmailField = body(EMAIL_FIELD)
-  .exists()
+  .exists({
+    checkNull: true,
+    checkFalsy: true,
+  })
   .withMessage('Email is required field')
   .isEmail()
   .withMessage('Invalid email');
