@@ -43,4 +43,11 @@ export default class Repository {
   create(...params) {
     return this.model.create(...params);
   }
+
+  /**
+   * @returns {Promise<Model>}
+   */
+  destroy(...params) {
+    return this.model.destroy(...params);
+  }
 }
