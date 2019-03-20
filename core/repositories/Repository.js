@@ -47,6 +47,13 @@ export default class Repository {
   /**
    * @returns {Promise<Model>}
    */
+  bulkCreate(...params) {
+    return this.model.bulkCreate(...params);
+  }
+
+  /**
+   * @returns {Promise<Model>}
+   */
   destroy(...params) {
     return this.model.destroy(...params);
   }
