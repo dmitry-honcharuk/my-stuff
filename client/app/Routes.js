@@ -5,7 +5,12 @@ import PrivateRoute from '@client/common/PrivateRoute';
 import PublicOnlyRoute from '@client/common/PublicOnlyRoute';
 
 import { LoginPage, RegistrationPage } from '@client/modules/auth';
-import { AdminRoot, CreateProduct, Users } from '@client/modules/admin';
+import {
+  AdminRoot,
+  CreateProduct,
+  CreateUser,
+  Users,
+} from '@client/modules/admin';
 
 const Routes = () => (
   <Router>
@@ -13,6 +18,7 @@ const Routes = () => (
       <PrivateRoute path="/" exact component={AdminRoot} />
       <PrivateRoute path="/create-product" exact component={CreateProduct} />
       <PrivateRoute path="/users" exact component={Users} />
+      <PrivateRoute path="/create-user" exact component={CreateUser} />
       <PublicOnlyRoute
         path="/registration"
         exact

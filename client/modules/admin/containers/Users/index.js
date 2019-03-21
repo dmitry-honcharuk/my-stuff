@@ -4,11 +4,11 @@ import Page, { PageActions } from '../../components/Page';
 
 import actions from './actions';
 
-const Root = () => (
+const Users = () => (
   <Page title="Users">
     <PageActions actions={actions} />
     <h1>Users</h1>
   </Page>
 );
 
-export default Root;
+export default Users;
