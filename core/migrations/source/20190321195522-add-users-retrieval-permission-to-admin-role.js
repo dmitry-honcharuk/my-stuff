@@ -24,7 +24,7 @@ const getPermission = name =>
 export const up = async () => {
   const [{ id: roleId }, { id: permissionId }] = await Promise.all([
     getRole(USER_ROLES.ADMIN),
-    getPermission(PERMISSIONS.USERS_CREATE),
+    getPermission(PERMISSIONS.USERS_GET_ALL),
   ]);
 
   await RolePermissionRepository.create({
@@ -36,7 +36,7 @@ export const up = async () => {
 export const down = async () => {
   const [{ id: roleId }, { id: permissionId }] = await Promise.all([
     getRole(USER_ROLES.ADMIN),
-    getPermission(PERMISSIONS.USERS_CREATE),
+    getPermission(PERMISSIONS.USERS_GET_ALL),
   ]);
 
   await RolePermissionRepository.destroy({
