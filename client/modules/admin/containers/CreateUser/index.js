@@ -1,10 +1,11 @@
 import React from 'react';
 
 import Page from '../../components/Page';
+import CreateUserForm from '../../components/CreateUserForm';
 
 const CreateUser = () => (
   <Page title="New User">
-    <h1>New User</h1>
+    <CreateUserForm />
   </Page>
 );
 

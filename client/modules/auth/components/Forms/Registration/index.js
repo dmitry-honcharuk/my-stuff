@@ -6,7 +6,11 @@ import { Field, reduxForm } from 'redux-form';
 import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import required from '@client/utils/validation/required';
+import {
+  requiredEmail,
+  requiredPassword,
+  requiredPasswordConfirm,
+} from '@client/utils/validation/required';
 
 import FormTextField from '@client/common/FormTextField';
 import ProcessButton from '@client/common/ProcessButton';
@@ -17,10 +21,6 @@ import * as actions from '../../../actions';
 
 import s from '../styles';
 import { Link } from 'react-router-dom';
-
-const requiredEmail = required('Email');
-const requiredPassword = required('Password');
-const requiredConfirmation = required('Password confirmation');
 
 const propTypes = {
   classes: PropTypes.object.isRequired,
@@ -66,7 +66,7 @@ const RegistrationForm = ({
         type="password"
         name="passwordConfirm"
         margin="dense"
-        validate={[requiredConfirmation]}
+        validate={[requiredPasswordConfirm]}
         component={FormTextField}
       />
       <div className={classes.actions}>

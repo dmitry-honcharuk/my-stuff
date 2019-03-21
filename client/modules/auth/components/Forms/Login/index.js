@@ -7,7 +7,10 @@ import { Field, reduxForm } from 'redux-form';
 import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import required from '@client/utils/validation/required';
+import {
+  requiredEmail,
+  requiredPassword,
+} from '@client/utils/validation/required';
 
 import FormTextField from '@client/common/FormTextField';
 import ProcessButton from '@client/common/ProcessButton';
@@ -17,9 +20,6 @@ import { LOGIN_FORM_NAME } from '../../../constants';
 import * as actions from '../../../actions';
 
 import s from '../styles';
-
-const requiredEmail = required('Email');
-const requiredPassword = required('Password');
 
 const propTypes = {
   classes: PropTypes.object.isRequired,
