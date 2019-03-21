@@ -6,6 +6,8 @@ export const {
   SITE_HOST,
   COOKIE_SECRET,
   TOKEN_SECRET,
+  REDIS_HOST,
+  REDIS_PORT,
 } = process.env;
 
 const { DB_USER, DB_PASS, DB_NAME, DB_HOST } = process.env;
