@@ -128,3 +128,5 @@ export const serializeUser = async userId => {
     permissions,
   };
 };
+
+export const getUsers = () => UserRepository.findAll();

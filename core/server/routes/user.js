@@ -9,7 +9,7 @@ import {
   withRequiredPasswordField,
   withValidRolesField,
 } from '@core/middlewares/validation';
-import { createUser, serializeUser } from '@core/services/User';
+import { createUser, getUsers, serializeUser } from '@core/services/User';
 
 const router = Router();
 
@@ -33,6 +33,15 @@ router.post(
     const serializedUser = await serializeUser(user.id);
 
     return res.json(serializedUser);
+  },
+);
+
+router.get(
+  '/',
+  withPermissions([PERMISSIONS.USERS_GET_ALL]),
+  async (req, res) => {
+    const users = await getUsers();
+    return res.json(users);
   },
 );
 
