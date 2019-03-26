@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { createProduct, deleteProductById } from '@core/services/Product';
+import { createProduct, deleteProductsByIds } from '@core/services/Product';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
 import {
   withRequiredNameField,
+  shouldBeOwner,
   respondIfError,
 } from '@core/middlewares/validation';
 
@@ -26,15 +27,17 @@ router.post(
   },
 );
 
-router.delete('/:id', withCurrentUser, async (req, res) => {
-  const { id } = req.params;
+router.delete(
+  '/',
+  withCurrentUser,
+  shouldBeOwner,
+  respondIfError,
+  async (req, res) => {
+    const { ids } = req.query;
 
-  try {
-    const deletedProduct = await deleteProductById(id);
+    await deleteProductsByIds(ids);
     return res.json(null);
-  } catch (err) {
-    return res.status(400).json({ error: 'Invalid product id' });
-  }
-});
+  },
+);
 
 export default router;
