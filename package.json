@@ -7,12 +7,18 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "concurrently -n=client,server -c=cyan,magenta \"yarn client:start\" \"yarn server:start\"",
+    "start": "concurrently -n=client,server,docker -c=cyan,magenta,green \"yarn client:start\" \"yarn server:start\" \"yarn docker:start\"",
+    "start:app": "concurrently -n=client,server -c=cyan,magenta \"yarn client:start\" \"yarn server:start\"",
     "server:start": "webpack --config webpack.server.config",
     "client:start": "webpack-dev-server -d --config webpack.client.config",
+    "docker:up": "docker-compose up -d",
+    "docker:start": "docker-compose start",
+    "docker:stop": "docker-compose stop",
+    "docker:down": "docker-compose down",
     "migration:generate": "sequelize migration:generate --name",
     "migrate": "sequelize db:migrate",
-    "migrate:undo": "sequelize db:migrate:undo"
+    "migrate:undo": "sequelize db:migrate:undo",
+    "migrate:undo:all": "sequelize db:migrate:undo:all"
   },
   "workspaces": [
     "core/*",

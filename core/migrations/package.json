@@ -6,6 +6,7 @@
   "dependencies": {
     "@babel/register": "^7.0.0",
     "@core/config": "1.0.0",
-    "@core/constants": "1.0.0"
+    "@core/constants": "1.0.0",
+    "@core/repositories": "1.0.0"
   }
 }
