@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { createProduct } from '@core/services/Product';
+import { createProduct, deleteProductsByIds } from '@core/services/Product';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
 import {
   withRequiredNameField,
+  shouldBeOwner,
   respondIfError,
 } from '@core/middlewares/validation';
 
@@ -23,6 +24,19 @@ router.post(
     });
 
     return res.json(product);
+  },
+);
+
+router.delete(
+  '/',
+  withCurrentUser,
+  shouldBeOwner,
+  respondIfError,
+  async (req, res) => {
+    const { ids } = req.query;
+
+    await deleteProductsByIds(ids);
+    return res.json(null);
   },
 );
 
