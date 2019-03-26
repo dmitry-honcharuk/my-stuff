@@ -1,3 +1,4 @@
 export default {
-  USER_CREATE: 'USER_CREATE',
+  USERS_CREATE: 'USERS_CREATE',
+  USERS_GET_ALL: 'USERS_GET_ALL',
 };

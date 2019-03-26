@@ -15,7 +15,7 @@ const router = Router();
 
 router.post(
   '/',
-  withPermissions([PERMISSIONS.USER_CREATE]),
+  withPermissions([PERMISSIONS.USERS_CREATE]),
   withValidRolesField,
   withRequiredPasswordField,
   withRequiredEmailField,
