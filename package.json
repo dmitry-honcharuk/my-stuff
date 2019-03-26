@@ -18,7 +18,7 @@
     "migration:generate": "sequelize migration:generate --name",
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
-    "test": "node ./core/config/loaded-env && echo $TEST"
+    "migrate:undo:all": "sequelize db:migrate:undo:all"
   },
   "workspaces": [
     "core/*",
