@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Page from '../../components/Page';
-import CreateUserForm from '../../components/CreateUserForm';
+import CreateUserPage from '../../components/CreateUserPage';
 
 const CreateUser = () => (
   <Page title="New User">
-    <CreateUserForm />
+    <CreateUserPage />
   </Page>
 );
 
