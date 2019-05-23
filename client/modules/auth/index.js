@@ -1,2 +1,2 @@
-export { default as RegistrationPage } from './containers/Registration';
-export { default as LoginPage } from './containers/Login';
+export { default as RegistrationPage } from './screens/Registration';
+export { default as LoginPage } from './screens/Login';

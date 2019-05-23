@@ -9,8 +9,14 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["prettier", "react", "react-hooks"],
-  "extends": ["plugin:prettier/recommended"],
+  "plugins": [
+    "prettier",
+    "react",
+    "react-hooks"
+  ],
+  "extends": [
+    "plugin:prettier/recommended"
+  ],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -25,7 +31,10 @@
         "capIsNew": false
       }
     ],
-    "quotes": [2, "single"],
+    "quotes": [
+      2,
+      "single"
+    ],
     "no-var": "error",
     "no-useless-catch": "error",
     "no-useless-return": "error",
@@ -70,10 +79,22 @@
     "no-console": [
       "error",
       {
-        "allow": ["error", "info"]
+        "allow": [
+          "error",
+          "info"
+        ]
       }
     ],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/forbid-prop-types": 1,
+    "react/prop-types": [
+      1,
+      {
+        "ignore": [
+          "classes"
+        ]
+      }
+    ]
   }
 }
