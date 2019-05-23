@@ -1,6 +1,6 @@
 import createReducer from './createReducer';
 
-const createRessettableReducer = resetActions => reducer => {
+const createMakeResettable = resetActions => reducer => {
   const initial = reducer(undefined, {});
 
   return (state = initial, action) => {
@@ -12,4 +12,4 @@ const createRessettableReducer = resetActions => reducer => {
   };
 };
 
-export default createRessettableReducer;
+export default createMakeResettable;

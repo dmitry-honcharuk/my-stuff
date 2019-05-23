@@ -14,7 +14,7 @@ import ProcessButton from '@client/common/ProcessButton';
 
 import { LOGIN_FORM_NAME } from '../../../constants';
 
-import * as actions from '../../../actions';
+import { operations } from '../../../state';
 
 import s from '../styles';
 
@@ -92,7 +92,7 @@ export default compose(
   connect(
     null,
     {
-      loginUser: actions.loginUser,
+      loginUser: operations.loginUser,
     },
   ),
   reduxForm({

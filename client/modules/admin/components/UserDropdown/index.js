@@ -9,7 +9,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 
-import { logout as logoutAction } from '../../../auth';
+import { operations as authOperations } from '../../../auth/state';
 
 import UserDropdown from './UserDropdown';
 
@@ -64,7 +64,7 @@ export default compose(
   connect(
     mapStateToProps,
     {
-      logout: logoutAction,
+      logout: authOperations.logout,
     },
   ),
   withStyles(s),

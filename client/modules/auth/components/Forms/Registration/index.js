@@ -13,7 +13,7 @@ import ProcessButton from '@client/common/ProcessButton';
 
 import { REGISTRATION_FORM_NAME } from '../../../constants';
 
-import * as actions from '../../../actions';
+import { operations } from '../../../state';
 
 import s from '../styles';
 import { Link } from 'react-router-dom';
@@ -101,7 +101,7 @@ export default compose(
   connect(
     null,
     {
-      registerUser: actions.registerUser,
+      registerUser: operations.registerUser,
     },
   ),
   reduxForm({
