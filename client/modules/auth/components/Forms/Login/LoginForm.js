@@ -1,49 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
+import { Field } from 'redux-form';
 import { Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 
 import required from '@client/utils/validation/required';
 
 import FormTextField from '@client/common/FormTextField';
 import ProcessButton from '@client/common/ProcessButton';
 
-import { REGISTRATION_FORM_NAME } from '../../../constants';
-
-import { operations } from '../../../state';
-
-import s from '../styles';
-import { Link } from 'react-router-dom';
-
 const requiredEmail = required('Email');
 const requiredPassword = required('Password');
-const requiredConfirmation = required('Password confirmation');
 
 const propTypes = {
-  classes: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  registerUser: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
+  anyTouched: PropTypes.bool,
+  error: PropTypes.string,
 };
 const defaultProps = {
   submitting: false,
+  anyTouched: false,
+  error: null,
 };
 
-const RegistrationForm = ({
-  classes,
-  submitting,
-  handleSubmit,
-  registerUser,
-  anyTouched,
-  error,
-}) => (
+const LoginForm = ({ classes, submitting, anyTouched, error, onSubmit }) => (
   <div className={classes.container}>
-    <form onSubmit={handleSubmit(registerUser)} className={classes.form}>
+    <form onSubmit={onSubmit} className={classes.form}>
       <Typography component="h4" variant="h4" align="center">
-        Sign up
+        Sign In
       </Typography>
       <Field
         label="Email"
@@ -61,14 +46,6 @@ const RegistrationForm = ({
         validate={[requiredPassword]}
         component={FormTextField}
       />
-      <Field
-        label="Confirm Password"
-        type="password"
-        name="passwordConfirm"
-        margin="dense"
-        validate={[requiredConfirmation]}
-        component={FormTextField}
-      />
       <div className={classes.actions}>
         <ProcessButton
           inProcess={submitting}
@@ -76,7 +53,7 @@ const RegistrationForm = ({
           color="primary"
           type="submit"
         >
-          Sign up
+          Sign in
         </ProcessButton>
       </div>
       {anyTouched && error && (
@@ -86,26 +63,15 @@ const RegistrationForm = ({
       )}
     </form>
     <div className={classes.linkWrapper}>
-      Already have an account?
-      <Link to="/login" className={classes.link}>
-        Sign In
+      Don’t have an account?
+      <Link to="/registration" className={classes.link}>
+        Sign Up
       </Link>
     </div>
   </div>
 );
 
-RegistrationForm.propTypes = propTypes;
-RegistrationForm.defaultProps = defaultProps;
+LoginForm.propTypes = propTypes;
+LoginForm.defaultProps = defaultProps;
 
-export default compose(
-  connect(
-    null,
-    {
-      registerUser: operations.registerUser,
-    },
-  ),
-  reduxForm({
-    form: REGISTRATION_FORM_NAME,
-  }),
-  withStyles(s),
-)(RegistrationForm);
+export default LoginForm;
