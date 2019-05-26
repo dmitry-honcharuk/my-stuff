@@ -6,7 +6,7 @@ export default ({ spacing, mixins }) => ({
   },
   content: {
     marginTop: spacing(8),
-    marginTop: spacing(2),
+    paddingTop: spacing(2),
     width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
     ...mixins.gutters(),
   },
