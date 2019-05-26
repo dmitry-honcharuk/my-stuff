@@ -7,7 +7,7 @@ export default ({ palette, spacing }) => ({
   icon: {
     color: palette.primary.contrastText,
     fontSize: 20,
-    marginRight: spacing.unit,
+    marginRight: spacing(1),
   },
   divider: {
     backgroundColor: fade(palette.common.white, 0.5),
