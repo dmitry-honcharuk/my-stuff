@@ -13,4 +13,11 @@ export default ({ palette, spacing }) => ({
   divider: {
     backgroundColor: fade(palette.common.white, 0.5),
   },
+  listItem: {
+    padding: 0,
+  },
+  link: {
+    display: 'flex',
+    padding: `${spacing(1)}px ${spacing(2)}px`,
+  },
 });

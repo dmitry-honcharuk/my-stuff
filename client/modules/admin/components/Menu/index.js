@@ -40,14 +40,20 @@ const Menu = ({ itemsGroup, match, classes }) =>
           ) : null;
 
           return (
-            <ListItem selected={match.url === link} key={key || link} button>
-              {iconNode}
+            <ListItem
+              className={classes.listItem}
+              selected={match.url === link}
+              key={key || link}
+              button
+            >
               <Link
+                className={classes.link}
                 component={RouterLink}
                 to={link}
                 underline="none"
                 color="inherit"
               >
+                {iconNode}
                 {label}
               </Link>
             </ListItem>
