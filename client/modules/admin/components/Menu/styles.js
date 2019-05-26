@@ -8,6 +8,7 @@ export default ({ palette, spacing }) => ({
     color: palette.primary.contrastText,
     fontSize: 20,
     marginRight: spacing(1),
+    minWidth: 0,
   },
   divider: {
     backgroundColor: fade(palette.common.white, 0.5),
