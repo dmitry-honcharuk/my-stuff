@@ -8,6 +8,7 @@ export default ({ spacing, mixins }) => ({
     marginTop: spacing(8),
     paddingTop: spacing(2),
     width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
+    marginLeft: 'auto',
     ...mixins.gutters(),
   },
   actions: {

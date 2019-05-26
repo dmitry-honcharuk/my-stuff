@@ -10,15 +10,19 @@ import { AdminRoot, CreateProduct, Users } from '@client/modules/admin';
 const Routes = () => (
   <Router>
     <Switch>
-      <PrivateRoute path="/" exact component={AdminRoot} />
-      <PrivateRoute path="/create-product" exact component={CreateProduct} />
-      <PrivateRoute path="/users" exact component={Users} />
+      <PrivateRoute path="/" exact render={() => <AdminRoot />} />
+      <PrivateRoute
+        path="/create-product"
+        exact
+        render={() => <CreateProduct />}
+      />
+      <PrivateRoute path="/users" exact render={() => <Users />} />
       <PublicOnlyRoute
         path="/registration"
         exact
-        component={RegistrationPage}
+        render={() => <RegistrationPage />}
       />
-      <PublicOnlyRoute path="/login" exact component={LoginPage} />
+      <PublicOnlyRoute path="/login" exact render={() => <LoginPage />} />
     </Switch>
   </Router>
 );
