@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 
 import withCurrentUser from '@client/utils/hoc/withCurrentUser';
+import { Sidebar } from '@client/modules/admin';
 
 const propTypes = {
+  render: PropTypes.func.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number,
   }).isRequired,
@@ -19,7 +21,19 @@ const PrivateRoute = ({ user, redirectTo, ...props }) => {
     return <Redirect to={redirectTo} />;
   }
 
-  return <Route {...props} />;
+  const { render } = props;
+
+  return (
+    <Route
+      {...props}
+      render={() => (
+        <Fragment>
+          <Sidebar />
+          {render()}
+        </Fragment>
+      )}
+    />
+  );
 };
 
 PrivateRoute.propTypes = propTypes;

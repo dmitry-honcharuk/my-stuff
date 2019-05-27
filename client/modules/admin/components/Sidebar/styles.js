@@ -6,6 +6,7 @@ export default ({ palette: { common, primary } }) => ({
     width: WIDTH,
     backgroundColor: primary.main,
     color: primary.contrastText,
+    position: 'fixed',
   },
   bar: {
     backgroundColor: primary.light,

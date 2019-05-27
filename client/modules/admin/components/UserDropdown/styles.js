@@ -1,10 +1,10 @@
 export default ({ spacing }) => {
-  const doubleSpacing = spacing.unit * 2;
+  const doubleSpacing = spacing(2);
 
   return {
     signedLabel: {
-      paddingTop: spacing.unit,
-      paddingBottom: spacing.unit,
+      paddingTop: spacing(1),
+      paddingBottom: spacing(1),
       paddingRight: doubleSpacing,
       paddingLeft: doubleSpacing,
     },
