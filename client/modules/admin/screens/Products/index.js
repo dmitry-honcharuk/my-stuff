@@ -1,11 +1,12 @@
 import React from 'react';
 
 import Page from '../../components/Page';
+import ProductsList from '../../components/ProductsList';
 
-const Root = () => (
+const Products = () => (
   <Page title="Products">
-    <h1>Products page</h1>
+    <ProductsList />
   </Page>
 );
 
-export default Root;
+export default Products;
