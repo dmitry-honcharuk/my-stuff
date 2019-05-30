@@ -8,6 +8,19 @@ export const createProduct = ({ name, description, userId }) =>
     UserId: userId,
   });
 
+export const updateProduct = ({ name, description, productId }) =>
+  ProductRepository.update(
+    {
+      name,
+      description,
+    },
+    {
+      where: {
+        id: productId,
+      },
+    },
+  );
+
 export const deleteProductsByIds = ids =>
   ProductRepository.destroy({ where: { id: ids } });
 

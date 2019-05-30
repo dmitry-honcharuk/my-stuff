@@ -1,9 +1,14 @@
 import { Router } from 'express';
-import { createProduct, deleteProductsByIds } from '@core/services/Product';
+import {
+  createProduct,
+  deleteProductsByIds,
+  updateProduct,
+} from '@core/services/Product';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
 import {
   withRequiredNameField,
-  shouldBeOwner,
+  shouldBeProductsOwner,
+  shouldBeProductOwner,
   respondIfError,
 } from '@core/middlewares/validation';
 
@@ -30,13 +35,31 @@ router.post(
 router.delete(
   '/',
   withCurrentUser,
-  shouldBeOwner,
+  shouldBeProductsOwner,
   respondIfError,
   async (req, res) => {
     const { ids } = req.query;
 
     await deleteProductsByIds(ids);
     return res.json(null);
+  },
+);
+
+router.put(
+  '/',
+  withCurrentUser,
+  shouldBeProductOwner,
+  respondIfError,
+  async (req, res) => {
+    const { name, description } = req.body;
+    const { id } = req.query;
+    const updatedProduct = await updateProduct({
+      name,
+      description,
+      productId: id,
+    });
+
+    return res.json(updatedProduct);
   },
 );
 

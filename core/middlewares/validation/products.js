@@ -2,8 +2,9 @@ import { query } from 'express-validator/check';
 import { isUserOwner } from '@core/services/Product';
 
 const FIELD = 'ids';
+const PRODUCT_ID = 'id';
 
-export const shouldBeOwner = query(FIELD)
+export const shouldBeProductsOwner = query(FIELD)
   .exists({
     checkNull: true,
     checkFalsy: true,
@@ -21,3 +22,10 @@ export const shouldBeOwner = query(FIELD)
 
     return true;
   });
+
+export const shouldBeProductOwner = query(PRODUCT_ID)
+  .exists({
+    checkNull: true,
+    checkFalsy: true,
+  })
+  .withMessage('Id is required');
