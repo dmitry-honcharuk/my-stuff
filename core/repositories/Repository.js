@@ -57,4 +57,11 @@ export default class Repository {
   destroy(...params) {
     return this.model.destroy(...params);
   }
+
+  /**
+   * @returns {Promise<Model>}
+   */
+  update(...params) {
+    return this.model.update(...params);
+  }
 }
