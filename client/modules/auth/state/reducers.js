@@ -1,10 +1,6 @@
 import { combineReducers } from 'redux';
 
-import {
-  createReducer,
-  createMakeResettable,
-  getPayload,
-} from '@client/utils/state';
+import { createReducer, combineActions, getPayload } from '@client/utils/state';
 
 import {
   INITIAL_AUTH_FAIL,
@@ -22,11 +18,11 @@ const userReducer = createReducer(initialState, {
   [LOGIN_USER_SUCCESS]: getPayload,
 });
 
-const makeResettable = createMakeResettable([
-  LOGOUT_SUCCESS,
-  INITIAL_AUTH_FAIL,
-]);
+const resettable = combineActions(
+  [LOGOUT_SUCCESS, INITIAL_AUTH_FAIL],
+  () => ({}),
+);
 
 export default combineReducers({
-  user: makeResettable(userReducer),
+  user: resettable(userReducer),
 });
