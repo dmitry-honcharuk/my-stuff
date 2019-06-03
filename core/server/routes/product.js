@@ -66,7 +66,7 @@ router.put(
 
     return updatedProductsCount === 0
       ? res.status(400).json({ error: 'Invalid product' })
-      : res.status(200);
+      : res.json(null);
   },
 );
 
