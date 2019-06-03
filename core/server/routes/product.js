@@ -46,20 +46,22 @@ router.delete(
 );
 
 router.put(
-  '/',
+  '/:id',
   withCurrentUser,
   shouldBeProductOwner,
   respondIfError,
   async (req, res) => {
     const { name, description } = req.body;
-    const { id } = req.query;
-    const updatedProduct = await updateProduct({
+    const { id } = req.params;
+    const [updatedProductsCount] = await updateProduct({
       name,
       description,
       productId: id,
     });
 
-    return res.json(updatedProduct);
+    return updatedProductsCount === 0
+      ? res.json('Something goes wrong')
+      : res.json('Product successfully updated');
   },
 );
 
