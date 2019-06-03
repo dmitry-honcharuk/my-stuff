@@ -5,17 +5,13 @@ import PrivateRoute from '@client/common/PrivateRoute';
 import PublicOnlyRoute from '@client/common/PublicOnlyRoute';
 
 import { LoginPage, RegistrationPage } from '@client/modules/auth';
-import { AdminRoot, CreateProduct, Users } from '@client/modules/admin';
+import { AdminRoot, Products, Users } from '@client/modules/admin';
 
 const Routes = () => (
   <Router>
     <Switch>
       <PrivateRoute path="/" exact render={() => <AdminRoot />} />
-      <PrivateRoute
-        path="/create-product"
-        exact
-        render={() => <CreateProduct />}
-      />
+      <PrivateRoute path="/products" exact render={() => <Products />} />
       <PrivateRoute path="/users" exact render={() => <Users />} />
       <PublicOnlyRoute
         path="/registration"

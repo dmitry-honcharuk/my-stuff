@@ -9,6 +9,11 @@ import {
 
 const router = Router();
 
+router.get('/', withCurrentUser, respondIfError, (req, res) => {
+  // @TODO implement real products retrieval
+  return res.json([]);
+});
+
 router.post(
   '/',
   withCurrentUser,

@@ -19,5 +19,6 @@ export default ({ palette, spacing }) => ({
   link: {
     display: 'flex',
     padding: `${spacing(1)}px ${spacing(2)}px`,
+    width: '100%',
   },
 });
