@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Table from '@client/common/Table';
+import Table, { Pagination } from '@client/common/Table';
 
 const propTypes = {
   products: PropTypes.arrayOf(
@@ -33,7 +33,18 @@ const COLUMNS = [
 ];
 
 const ProductsListView = ({ products }) => (
-  <Table dataSource={products} columns={COLUMNS} />
+  <Table
+    dataSource={products}
+    columns={COLUMNS}
+    pagination={
+      <Pagination
+        total={100}
+        rowsPerPage={10}
+        page={2}
+        onPageChange={(_, page) => {}}
+      />
+    }
+  />
 );
 
 ProductsListView.propTypes = propTypes;
