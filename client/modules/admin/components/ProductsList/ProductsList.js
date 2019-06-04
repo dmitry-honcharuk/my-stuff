@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 import Table, { Pagination } from '@client/common/Table';
 
@@ -26,9 +28,19 @@ const defaultProps = {
 
 const COLUMNS = [
   {
+    title: '#ID',
+    key: 'id',
+    dataIndex: 'id',
+  },
+  {
     title: 'Title',
     key: 'name',
     dataIndex: 'name',
+    render: ({ id, name }) => (
+      <Link component={RouterLink} to={`/products/${id}`}>
+        {name}
+      </Link>
+    ),
   },
   {
     title: 'Description',
