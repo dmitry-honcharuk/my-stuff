@@ -1,3 +1,3 @@
-const getPayload = (state, { payload }) => payload;
+const getPayload = (state, payload) => payload;
 
 export default getPayload;

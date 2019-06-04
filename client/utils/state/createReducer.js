@@ -2,9 +2,10 @@ const createReducer = (initialState, handlers = {}) => (
   state = initialState,
   action,
 ) => {
-  const handler = handlers[action.type] || handlers.default;
+  const { type, payload, ...other } = action;
+  const handler = handlers[type] || handlers.default;
 
-  return handler ? handler(state, action) : state;
+  return handler ? handler(state, payload, other) : state;
 };
 
 export default createReducer;
