@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import Table, { Pagination } from '@client/common/Table';
 
 const propTypes = {
+  onPageChange: PropTypes.func.isRequired,
+  total: PropTypes.number,
+  perPage: PropTypes.number,
+  page: PropTypes.number,
   products: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -14,6 +18,9 @@ const propTypes = {
 };
 const defaultProps = {
   products: [],
+  total: 0,
+  perPage: 10,
+  page: 1,
 };
 
 const COLUMNS = [
@@ -32,16 +39,17 @@ const COLUMNS = [
   },
 ];
 
-const ProductsListView = ({ products }) => (
+const ProductsListView = ({ products, onPageChange, total, perPage, page }) => (
   <Table
     dataSource={products}
     columns={COLUMNS}
     pagination={
       <Pagination
-        total={100}
-        rowsPerPage={10}
-        page={2}
-        onPageChange={(_, page) => {}}
+        total={total}
+        rowsPerPage={perPage}
+        page={page}
+        onPageChange={(_, newPage) => onPageChange(newPage)}
+        rowsPerPageOptions={[]}
       />
     }
   />

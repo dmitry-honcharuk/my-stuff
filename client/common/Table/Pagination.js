@@ -5,15 +5,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 const propTypes = {
   total: PropTypes.number,
   onPageChange: PropTypes.func,
-  page: PropTypes.number,
-  rowsPerPage: PropTypes.number,
-};
-const defaultProps = {
-  page: 1,
-  rowsPerPage: 10,
 };
 
-const Pagination = ({ total, onPageChange, page, rowsPerPage }) => {
+const Pagination = ({ total, onPageChange, ...props }) => {
   if (!total || !onPageChange) {
     return null;
   }
@@ -23,13 +17,11 @@ const Pagination = ({ total, onPageChange, page, rowsPerPage }) => {
       component={'td'}
       count={total}
       onChangePage={onPageChange}
-      page={page}
-      rowsPerPage={rowsPerPage}
+      {...props}
     />
   );
 };
 
 Pagination.propTypes = propTypes;
-Pagination.defaultProps = defaultProps;
 
 export default Pagination;
