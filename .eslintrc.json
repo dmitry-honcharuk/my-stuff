@@ -73,7 +73,7 @@
       }
     ],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "error",
     "react/forbid-prop-types": 1,
     "react/prop-types": [
       1,

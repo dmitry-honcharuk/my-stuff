@@ -19,6 +19,11 @@ router.get('/', withCurrentUser, respondIfError, (req, res) => {
   return res.json([]);
 });
 
+router.get('/count', withCurrentUser, respondIfError, (req, res) => {
+  // @TODO implement real products quantity retrieval
+  return res.json({ total: 0 });
+});
+
 router.post(
   '/',
   withCurrentUser,
