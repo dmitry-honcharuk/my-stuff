@@ -6,6 +6,7 @@ import {
   GET_PRODUCTS_PENDING,
   GET_PRODUCTS_SUCCESS,
   PRODUCTS_PAGE_CHANGE,
+  PRODUCTS_PER_PAGE_CHANGE,
 } from './types';
 
 export const productsFetched = payload => ({
@@ -41,4 +42,9 @@ export const productsCountStarted = payload => ({
 export const productsPageChange = newPage => ({
   type: PRODUCTS_PAGE_CHANGE,
   payload: newPage,
+});
+
+export const productsPerPageChange = perPage => ({
+  type: PRODUCTS_PER_PAGE_CHANGE,
+  payload: perPage,
 });

@@ -7,6 +7,7 @@ import ProductsListView from './ProductsList';
 
 import {
   changeProductPage,
+  changeProductPerPage,
   countProducts,
   fetchProducts,
 } from '../../state/operations';
@@ -14,6 +15,7 @@ import {
 const propTypes = {
   fetchProducts: PropTypes.func.isRequired,
   changeProductPage: PropTypes.func.isRequired,
+  changeProductPerPage: PropTypes.func.isRequired,
   countProducts: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.object),
   pagination: PropTypes.shape({
@@ -29,6 +31,7 @@ const defaultProps = {
 const ProductsList = ({
   fetchProducts,
   changeProductPage,
+  changeProductPerPage,
   countProducts,
   products,
   pagination,
@@ -48,6 +51,7 @@ const ProductsList = ({
     <ProductsListView
       products={products}
       onPageChange={changeProductPage}
+      onPerPageChange={changeProductPerPage}
       page={pagination.page}
       perPage={pagination.perPage}
       total={pagination.total}
@@ -68,6 +72,7 @@ export default compose(
     mapStateToProps,
     {
       changeProductPage,
+      changeProductPerPage,
       countProducts,
       fetchProducts,
     },

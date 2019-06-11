@@ -9,6 +9,7 @@ import {
   productsFetchFailed,
   productsFetchStarted,
   productsPageChange,
+  productsPerPageChange,
 } from './actions';
 
 export const fetchProducts = ({ page = 1, perPage = 10 }) => async dispatch => {
@@ -37,3 +38,4 @@ export const countProducts = () => async dispatch => {
 };
 
 export const changeProductPage = productsPageChange;
+export const changeProductPerPage = productsPerPageChange;

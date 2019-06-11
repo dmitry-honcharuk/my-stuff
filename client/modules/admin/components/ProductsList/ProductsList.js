@@ -5,6 +5,7 @@ import Table, { Pagination } from '@client/common/Table';
 
 const propTypes = {
   onPageChange: PropTypes.func.isRequired,
+  onPerPageChange: PropTypes.func.isRequired,
   total: PropTypes.number,
   perPage: PropTypes.number,
   page: PropTypes.number,
@@ -39,7 +40,14 @@ const COLUMNS = [
   },
 ];
 
-const ProductsListView = ({ products, onPageChange, total, perPage, page }) => (
+const ProductsListView = ({
+  products,
+  onPageChange,
+  onPerPageChange,
+  total,
+  perPage,
+  page,
+}) => (
   <Table
     dataSource={products}
     columns={COLUMNS}
@@ -49,7 +57,7 @@ const ProductsListView = ({ products, onPageChange, total, perPage, page }) => (
         rowsPerPage={perPage}
         page={page}
         onPageChange={(_, newPage) => onPageChange(newPage)}
-        rowsPerPageOptions={[]}
+        onChangeRowsPerPage={({ target }) => onPerPageChange(target.value)}
       />
     }
   />
