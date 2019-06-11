@@ -4,24 +4,37 @@ import {
   deleteProductsByIds,
   updateProduct,
 } from '@core/services/Product';
+import { ProductRepository } from '@core/repositories';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
+import withPaging from '@core/middlewares/withPaging';
 import {
-  withRequiredNameField,
-  shouldBeProductsOwner,
-  shouldBeProductOwner,
   respondIfError,
+  shouldBeProductOwner,
+  shouldBeProductsOwner,
+  withRequiredNameField,
 } from '@core/middlewares/validation';
 
 const router = Router();
 
-router.get('/', withCurrentUser, respondIfError, (req, res) => {
-  // @TODO implement real products retrieval
-  return res.json([]);
-});
+router.get(
+  '/',
+  withCurrentUser,
+  withPaging,
+  respondIfError,
+  async (req, res) => {
+    const { limit, offset } = req.paging;
+    const products = await ProductRepository.findAll({
+      offset,
+      limit,
+    });
 
-router.get('/count', withCurrentUser, respondIfError, (req, res) => {
-  // @TODO implement real products quantity retrieval
-  return res.json({ total: 0 });
+    return res.json(products);
+  },
+);
+
+router.get('/count', withCurrentUser, respondIfError, async (req, res) => {
+  const total = await ProductRepository.count();
+  return res.json({ total });
 });
 
 router.post(

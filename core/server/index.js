@@ -2,6 +2,7 @@ import path from 'path';
 import express, { json } from 'express';
 import cookieParser from 'cookie-parser';
 import proxy from 'http-proxy-middleware';
+import morgan from 'morgan';
 
 import { COOKIE_SECRET, PORT, SITE_HOST, WDS_PORT } from '@core/config';
 
@@ -9,6 +10,7 @@ import apiRoutes from './routes/api';
 
 const app = express();
 
+app.use(morgan('dev'));
 app.use(cookieParser(COOKIE_SECRET));
 app.use(json());
 

@@ -1,6 +1,10 @@
 import { createReducer } from '@client/utils/state';
 
-import { PRODUCTS_PAGE_CHANGE, COUNT_PRODUCTS_SUCCESS } from '../types';
+import {
+  COUNT_PRODUCTS_SUCCESS,
+  PRODUCTS_PAGE_CHANGE,
+  PRODUCTS_PER_PAGE_CHANGE,
+} from '../types';
 
 const initialState = {
   page: 0,
@@ -12,6 +16,10 @@ export default createReducer(initialState, {
   [PRODUCTS_PAGE_CHANGE]: (state, newPage) => ({
     ...state,
     page: newPage,
+  }),
+  [PRODUCTS_PER_PAGE_CHANGE]: (state, perPage) => ({
+    ...state,
+    perPage,
   }),
   [COUNT_PRODUCTS_SUCCESS]: (state, total) => ({
     ...state,
