@@ -4,3 +4,4 @@ export * from './respondIfError';
 export * from './name';
 export * from './roles';
 export * from './products';
+export * from './paging';
