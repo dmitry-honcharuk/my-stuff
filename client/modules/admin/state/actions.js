@@ -38,13 +38,3 @@ export const productsCountStarted = payload => ({
   type: COUNT_PRODUCTS_PENDING,
   payload,
 });
-
-export const productsPageChange = newPage => ({
-  type: PRODUCTS_PAGE_CHANGE,
-  payload: newPage,
-});
-
-export const productsPerPageChange = perPage => ({
-  type: PRODUCTS_PER_PAGE_CHANGE,
-  payload: perPage,
-});

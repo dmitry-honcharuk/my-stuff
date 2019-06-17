@@ -55,8 +55,8 @@ const ProductsListView = ({
       <Pagination
         total={total}
         rowsPerPage={perPage}
-        page={page}
-        onPageChange={(_, newPage) => onPageChange(newPage)}
+        page={page - 1}
+        onPageChange={(_, newPage) => onPageChange(newPage + 1)}
         onChangeRowsPerPage={({ target }) => onPerPageChange(target.value)}
       />
     }

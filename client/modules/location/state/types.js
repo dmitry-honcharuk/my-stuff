@@ -1,0 +1,4 @@
+const MODULE = 'LOCATION';
+
+export const UPDATE_PAGE = `${MODULE}/UPDATE_PAGE`;
+export const UPDATE_PER_PAGE = `${MODULE}/UPDATE_PER_PAGE`;

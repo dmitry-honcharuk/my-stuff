@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 
 import PrivateRoute from '@client/common/PrivateRoute';
 import PublicOnlyRoute from '@client/common/PublicOnlyRoute';
@@ -7,8 +8,10 @@ import PublicOnlyRoute from '@client/common/PublicOnlyRoute';
 import { LoginPage, RegistrationPage } from '@client/modules/auth';
 import { AdminRoot, Products, Users } from '@client/modules/admin';
 
+import history from './history';
+
 const Routes = () => (
-  <Router>
+  <ConnectedRouter history={history}>
     <Switch>
       <PrivateRoute path="/" exact render={() => <AdminRoot />} />
       <PrivateRoute path="/products" exact render={() => <Products />} />
@@ -20,7 +23,7 @@ const Routes = () => (
       />
       <PublicOnlyRoute path="/login" exact render={() => <LoginPage />} />
     </Switch>
-  </Router>
+  </ConnectedRouter>
 );
 
 export default Routes;
