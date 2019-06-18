@@ -1,6 +1,8 @@
 import { ProductRepository } from '@core/repositories';
 import { Op } from 'sequelize';
 
+export const getProduct = id => ProductRepository.findByPk(id);
+
 export const createProduct = ({ name, description, userId }) =>
   ProductRepository.create({
     name,
