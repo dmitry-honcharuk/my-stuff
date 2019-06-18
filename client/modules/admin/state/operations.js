@@ -2,6 +2,9 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 import {
+  productDetailsFetched,
+  productDetailsFetchFailed,
+  productDetailsFetchStarted,
   productsCounted,
   productsCountFailed,
   productsCountStarted,
@@ -19,6 +22,17 @@ export const fetchProducts = ({ page = 1, perPage = 10 }) => async dispatch => {
     dispatch(productsFetched(products));
   } catch ({ response: { data } }) {
     dispatch(productsFetchFailed(data));
+  }
+};
+
+export const fetchProductDetails = id => async dispatch => {
+  dispatch(productDetailsFetchStarted());
+
+  try {
+    const { data: product } = await axios.get(`/api/products/${id}`);
+    dispatch(productDetailsFetched(product));
+  } catch ({ response: { data } }) {
+    dispatch(productDetailsFetchFailed(data));
   }
 };
 
