@@ -28,7 +28,7 @@ const defaultProps = {
   isEdit: false,
 };
 
-const EditableForm = ({ onSubmit, dataSet, actions, isEdit }) => {
+const EditableDetails = ({ onSubmit, dataSet, actions, isEdit }) => {
   const classes = useStyles();
   const actionButton = (
     <Button variant="contained" color="primary" type="submit">
@@ -39,15 +39,17 @@ const EditableForm = ({ onSubmit, dataSet, actions, isEdit }) => {
     <form onSubmit={onSubmit}>
       {dataSet.map(item => (
         <Paper key={item.name} className={classes.root}>
-          <DataField label={item.label} value={item.value} />
+          <DataField name={item.name} label={item.label} isEdit={isEdit} />
         </Paper>
       ))}
-      <div className={classes.actions}>{actions || actionButton}</div>
+      {isEdit && (
+        <div className={classes.actions}>{actions || actionButton}</div>
+      )}
     </form>
   );
 };
 
-EditableForm.propTypes = propTypes;
-EditableForm.defaultProps = defaultProps;
+EditableDetails.propTypes = propTypes;
+EditableDetails.defaultProps = defaultProps;
 
-export default EditableForm;
+export default EditableDetails;

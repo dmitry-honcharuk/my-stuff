@@ -1,29 +1,35 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
+import { compose, withProps } from 'recompose';
+import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
+import pick from 'lodash/pick';
 
-import EditableForm from '@client/common/EditableForm';
+import hideIf from '@client/utils/hoc/hideIf';
+
+import EditableDetails from '@client/common/EditableDetails';
+import {
+  getProductDetails,
+  getProductEditMode,
+  getProductFields,
+} from '../../state/selectors';
+
+import { PRODUCT_DETAILS_FORM } from '../../constants';
 
 const propTypes = {
-  product: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-  }).isRequired,
+  productFields: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      label: PropTypes.node.isRequired,
+      value: PropTypes.node.isRequired,
+    }),
+  ).isRequired,
+  isEdit: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 
-const ProductDetails = ({ product, handleSubmit }) => {
-  const productFields = useMemo(() => {
-    const keys = ['name', 'description'];
-    return Object.keys(product)
-      .filter(key => keys.includes(key))
-      .map(key => ({
-        name: key,
-        value: product[key],
-        label: key,
-      }));
-  }, [product]);
-
+const ProductDetails = ({ productFields, isEdit, handleSubmit }) => {
   const onSubmit = useCallback(
     handleSubmit(() => {
       console.info('SUBMIT');
@@ -31,11 +37,30 @@ const ProductDetails = ({ product, handleSubmit }) => {
     [],
   );
 
-  return <EditableForm onSubmit={onSubmit} dataSet={productFields} />;
+  return (
+    <EditableDetails
+      onSubmit={onSubmit}
+      isEdit={isEdit}
+      dataSet={productFields}
+    />
+  );
 };
 
 ProductDetails.propTypes = propTypes;
 
-export default reduxForm({
-  form: 'productUpdate',
-})(ProductDetails);
+const mapStateToProps = state => ({
+  isEdit: getProductEditMode(state),
+  product: getProductDetails(state),
+});
+
+export default compose(
+  connect(mapStateToProps),
+  hideIf(({ product }) => isEmpty(product)),
+  withProps(({ product }) => ({
+    productFields: getProductFields(product),
+    initialValues: pick(product, ['name', 'description']),
+  })),
+  reduxForm({
+    form: PRODUCT_DETAILS_FORM,
+  }),
+)(ProductDetails);

@@ -3,7 +3,7 @@ const createReducer = (initialState, handlers = {}) => (
   action,
 ) => {
   const { type, payload, ...other } = action;
-  const handler = handlers[type] || handlers.default;
+  const handler = handlers[type] || handlers.EditableDetails;
 
   return handler ? handler(state, payload, other) : state;
 };

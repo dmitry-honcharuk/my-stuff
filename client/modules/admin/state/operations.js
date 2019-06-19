@@ -5,6 +5,8 @@ import {
   productDetailsFetched,
   productDetailsFetchFailed,
   productDetailsFetchStarted,
+  productEditModeDisabled,
+  productEditModeEnabled,
   productsCounted,
   productsCountFailed,
   productsCountStarted,
@@ -48,3 +50,6 @@ export const countProducts = () => async dispatch => {
     dispatch(productsCountFailed(data));
   }
 };
+
+export const enableProductEditMode = productEditModeEnabled;
+export const disableProductEditMode = productEditModeDisabled;

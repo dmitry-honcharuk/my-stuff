@@ -8,9 +8,8 @@ import {
   GET_PRODUCTS_FAILURE,
   GET_PRODUCTS_PENDING,
   GET_PRODUCTS_SUCCESS,
-  PRODUCTS_PAGE_CHANGE,
-  PRODUCTS_PER_PAGE_CHANGE,
-  TOGGLE_PRODUCT_EDIT_MODE,
+  PRODUCT_EDIT_MODE_DISABLED,
+  PRODUCT_EDIT_MODE_ENABLED,
 } from './types';
 
 export const productsFetched = payload => ({
@@ -57,6 +56,10 @@ export const productsCountStarted = payload => ({
   payload,
 });
 
-export const toggleProductEditMode = () => ({
-  type: TOGGLE_PRODUCT_EDIT_MODE,
+export const productEditModeEnabled = () => ({
+  type: PRODUCT_EDIT_MODE_ENABLED,
+});
+
+export const productEditModeDisabled = () => ({
+  type: PRODUCT_EDIT_MODE_DISABLED,
 });
