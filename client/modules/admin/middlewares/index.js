@@ -1,3 +1,4 @@
 import resetProductForm from './resetProductForm';
+import redirect from './redirect';
 
-export default [resetProductForm];
+export default [resetProductForm, redirect];

@@ -2,6 +2,9 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 import {
+  productDeleted,
+  productDeleteFailed,
+  productDeleteStarted,
   productDetailsFetched,
   productDetailsFetchFailed,
   productDetailsFetchStarted,
@@ -69,5 +72,20 @@ export const updateProduct = (productId, productFields) => async dispatch => {
     dispatch(productUpdated(productFields));
   } catch ({ response: { data } }) {
     dispatch(productUpdateFailed(data));
+  }
+};
+
+export const removeProduct = productId => async dispatch => {
+  dispatch(productDeleteStarted());
+
+  try {
+    const ids = [productId];
+    const query = queryString.stringify({ ids }, { arrayFormat: 'bracket' });
+
+    await axios.delete(`/api/products?${query}`);
+
+    dispatch(productDeleted(productId, { redirect: '/products' }));
+  } catch ({ response: { data } }) {
+    dispatch(productDeleteFailed(data));
   }
 };
