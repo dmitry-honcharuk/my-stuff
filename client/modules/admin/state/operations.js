@@ -13,6 +13,9 @@ import {
   productsFetched,
   productsFetchFailed,
   productsFetchStarted,
+  productUpdated,
+  productUpdateFailed,
+  productUpdateStarted,
 } from './actions';
 
 export const fetchProducts = ({ page = 1, perPage = 10 }) => async dispatch => {
@@ -52,4 +55,19 @@ export const countProducts = () => async dispatch => {
 };
 
 export const enableProductEditMode = productEditModeEnabled;
+
 export const disableProductEditMode = productEditModeDisabled;
+
+export const updateProduct = (productId, productFields) => async dispatch => {
+  dispatch(productUpdateStarted());
+
+  try {
+    const { data: products } = await axios.put(
+      `/api/products/${productId}`,
+      productFields,
+    );
+    dispatch(productUpdated(productFields));
+  } catch ({ response: { data } }) {
+    dispatch(productUpdateFailed(data));
+  }
+};

@@ -10,6 +10,9 @@ import {
   GET_PRODUCTS_SUCCESS,
   PRODUCT_EDIT_MODE_DISABLED,
   PRODUCT_EDIT_MODE_ENABLED,
+  PRODUCT_UPDATE_PENDING,
+  PRODUCT_UPDATE_SUCCESS,
+  PRODUCT_UPDATE_FAILURE,
 } from './types';
 
 export const productsFetched = payload => ({
@@ -62,4 +65,18 @@ export const productEditModeEnabled = () => ({
 
 export const productEditModeDisabled = () => ({
   type: PRODUCT_EDIT_MODE_DISABLED,
+});
+
+export const productUpdateStarted = () => ({
+  type: PRODUCT_UPDATE_PENDING,
+});
+
+export const productUpdated = product => ({
+  type: PRODUCT_UPDATE_SUCCESS,
+  payload: product,
+});
+
+export const productUpdateFailed = error => ({
+  type: PRODUCT_UPDATE_FAILURE,
+  payload: error,
 });
