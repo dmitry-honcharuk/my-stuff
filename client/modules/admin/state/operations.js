@@ -2,6 +2,9 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 import {
+  productDeleted,
+  productDeleteFailed,
+  productDeleteStarted,
   productDetailsFetched,
   productDetailsFetchFailed,
   productDetailsFetchStarted,
@@ -13,6 +16,9 @@ import {
   productsFetched,
   productsFetchFailed,
   productsFetchStarted,
+  productUpdated,
+  productUpdateFailed,
+  productUpdateStarted,
 } from './actions';
 
 export const fetchProducts = ({ page = 1, perPage = 10 }) => async dispatch => {
@@ -52,4 +58,34 @@ export const countProducts = () => async dispatch => {
 };
 
 export const enableProductEditMode = productEditModeEnabled;
+
 export const disableProductEditMode = productEditModeDisabled;
+
+export const updateProduct = (productId, productFields) => async dispatch => {
+  dispatch(productUpdateStarted());
+
+  try {
+    const { data: products } = await axios.put(
+      `/api/products/${productId}`,
+      productFields,
+    );
+    dispatch(productUpdated(productFields));
+  } catch ({ response: { data } }) {
+    dispatch(productUpdateFailed(data));
+  }
+};
+
+export const removeProduct = productId => async dispatch => {
+  dispatch(productDeleteStarted());
+
+  try {
+    const ids = [productId];
+    const query = queryString.stringify({ ids }, { arrayFormat: 'bracket' });
+
+    await axios.delete(`/api/products?${query}`);
+
+    dispatch(productDeleted(productId, { redirect: '/products' }));
+  } catch ({ response: { data } }) {
+    dispatch(productDeleteFailed(data));
+  }
+};

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
+import hideIf from '@client/utils/hoc/hideIf';
 import withRouteParams from '@client/utils/hoc/withRouteParams';
 
 import Page, { PageActions } from '../../components/Page';
@@ -47,4 +48,5 @@ export default compose(
       fetchProductDetails,
     },
   ),
+  hideIf(({ product }) => !product),
 )(ProductDetailsScreen);

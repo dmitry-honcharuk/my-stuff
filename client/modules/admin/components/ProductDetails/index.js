@@ -17,7 +17,12 @@ import {
 
 import { PRODUCT_DETAILS_FORM } from '../../constants';
 
+import { updateProduct } from '../../state/operations';
+
 const propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }).isRequired,
   productFields: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -26,15 +31,21 @@ const propTypes = {
     }),
   ).isRequired,
   isEdit: PropTypes.bool.isRequired,
+  updateProduct: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 
-const ProductDetails = ({ productFields, isEdit, handleSubmit }) => {
+const ProductDetails = ({
+  product,
+  productFields,
+  isEdit,
+  updateProduct,
+  handleSubmit,
+}) => {
+  const { id: productId } = product;
   const onSubmit = useCallback(
-    handleSubmit(() => {
-      console.info('SUBMIT');
-    }),
-    [],
+    handleSubmit(values => updateProduct(productId, values)),
+    [productId, updateProduct, handleSubmit],
   );
 
   return (
@@ -54,7 +65,12 @@ const mapStateToProps = state => ({
 });
 
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    {
+      updateProduct,
+    },
+  ),
   hideIf(({ product }) => isEmpty(product)),
   withProps(({ product }) => ({
     productFields: getProductFields(product),
