@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   createProduct,
   deleteProductsByIds,
+  getProduct,
   updateProduct,
 } from '@core/services/Product';
 import { ProductRepository } from '@core/repositories';
@@ -54,6 +55,16 @@ router.post(
     return res.json(product);
   },
 );
+
+router.get('/:id', withCurrentUser, respondIfError, async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  const product = await getProduct(+id);
+
+  return res.json(product);
+});
 
 router.delete(
   '/',

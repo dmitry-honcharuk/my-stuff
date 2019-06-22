@@ -1,12 +1,16 @@
 import React from 'react';
 
 import Page, { PageActions } from '../../components/Page';
-
-import actions from './actions';
+import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 const Root = () => (
   <Page title="Users">
-    <PageActions actions={actions} />
+    <PageActions>
+      <Button component={Link} to="/create-user" color="secondary">
+        Create
+      </Button>
+    </PageActions>
     <h1>Users</h1>
   </Page>
 );

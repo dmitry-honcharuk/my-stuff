@@ -14,4 +14,7 @@ export default ({ spacing, mixins }) => ({
   actions: {
     float: 'right',
   },
+  clearfix: {
+    clear: 'both',
+  },
 });
