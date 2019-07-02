@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -7,10 +7,12 @@ import { compose } from 'recompose';
 
 import withRouteParams from '@client/utils/hoc/withRouteParams';
 
+import { useOpenDialog } from '../../../dialog';
+
+import { DIALOG_NAME as DELETE_PRODUCT_DIALOG } from '../RemoveProductDialog/constants';
 import {
   disableProductEditMode,
   enableProductEditMode,
-  removeProduct,
 } from '../../state/operations';
 import { getProductEditMode } from '../../state/selectors';
 
@@ -24,21 +26,16 @@ const propTypes = {
   productId: PropTypes.string.isRequired,
   enableEditMode: PropTypes.func.isRequired,
   disableEditMode: PropTypes.func.isRequired,
-  removeProduct: PropTypes.func.isRequired,
   isEditEnabled: PropTypes.bool.isRequired,
 };
 
 const ProductDetailsActions = ({
-  productId,
   enableEditMode,
   disableEditMode,
-  removeProduct,
   isEditEnabled,
 }) => {
   const classes = useStyles();
-  const onDelete = useCallback(() => {
-    removeProduct(+productId);
-  }, [removeProduct, productId]);
+  const openDialog = useOpenDialog(DELETE_PRODUCT_DIALOG);
 
   const actions = isEditEnabled ? (
     <Button color="primary" onClick={disableEditMode}>
@@ -49,7 +46,7 @@ const ProductDetailsActions = ({
       <Button color="primary" onClick={enableEditMode}>
         Edit
       </Button>
-      <Button color="secondary" onClick={onDelete}>
+      <Button color="secondary" onClick={() => openDialog()}>
         Remove
       </Button>
     </Fragment>
@@ -71,7 +68,6 @@ export default compose(
     {
       enableEditMode: enableProductEditMode,
       disableEditMode: disableProductEditMode,
-      removeProduct,
     },
   ),
 )(ProductDetailsActions);

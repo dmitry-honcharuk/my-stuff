@@ -9,6 +9,7 @@ import withRouteParams from '@client/utils/hoc/withRouteParams';
 import Page, { PageActions } from '../../components/Page';
 import ProductDetails from '../../components/ProductDetails';
 import ProductDetailsActions from '../../components/ProductDetails/ProductDetailsActions';
+import RemoveProductDialog from '../../components/RemoveProductDialog';
 import { fetchProductDetails } from '../../state/operations';
 
 const propTypes = {
@@ -30,6 +31,7 @@ const ProductDetailsScreen = ({ productId, product, fetchProductDetails }) => {
         <ProductDetailsActions />
       </PageActions>
       <ProductDetails product={product} />
+      <RemoveProductDialog />
     </Page>
   );
 };
