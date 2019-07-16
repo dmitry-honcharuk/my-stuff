@@ -5,10 +5,10 @@
   "license": "MIT",
   "dependencies": {
     "@core/constants": "1.0.0",
+    "query-string": "^6.7.0",
     "react": "^16.8.4",
     "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
-    "recompose": "^0.30.0",
-    "query-string": "^6.7.0"
+    "recompose": "^0.30.0"
   }
 }
