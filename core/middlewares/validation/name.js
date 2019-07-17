@@ -7,4 +7,6 @@ export const withRequiredNameField = body(NAME_FIELD)
     checkNull: true,
     checkFalsy: true,
   })
-  .withMessage('Name is required field');
+  .withMessage('Name is required field')
+  .isString()
+  .withMessage('Should be a string');
