@@ -1,4 +1,4 @@
-import { CategoryRepository } from '@core/repositories';
+import { CategoryRepository, ProductRepository } from '@core/repositories';
 
 export const createCategory = name =>
   CategoryRepository.create({
@@ -10,3 +10,6 @@ export const getCategories = ({ offset, limit }) =>
     offset,
     limit,
   });
+
+export const deleteCategoriesByIds = ids =>
+  CategoryRepository.destroy({ where: { id: ids } });

@@ -1,5 +1,9 @@
 import { Router } from 'express';
-import { createCategory, getCategories } from '@core/services/Category';
+import {
+  createCategory,
+  getCategories,
+  deleteCategoriesByIds,
+} from '@core/services/Category';
 import {
   respondIfError,
   withRequiredNameField,
@@ -23,6 +27,13 @@ router.get('/', withPaging, respondIfError, async (req, res) => {
   });
 
   return res.json(categories);
+});
+
+router.delete('/', async (req, res) => {
+  const { ids } = req.query;
+
+  await deleteCategoriesByIds(ids);
+  return res.json(null);
 });
 
 export default router;
