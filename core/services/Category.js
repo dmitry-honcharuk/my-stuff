@@ -25,3 +25,5 @@ export const updateCategory = ({ name, categoryId }) =>
       },
     },
   );
+
+export const getCategory = id => CategoryRepository.findByPk(id);

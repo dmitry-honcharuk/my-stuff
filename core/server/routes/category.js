@@ -4,6 +4,7 @@ import {
   getCategories,
   deleteCategoriesByIds,
   updateCategory,
+  getCategory,
 } from '@core/services/Category';
 import {
   respondIfError,
@@ -48,6 +49,16 @@ router.put('/:id', async (req, res) => {
   return updatedCategoriesCount === 0
     ? res.status(400).json({ error: 'Invalid category' })
     : res.json(null);
+});
+
+router.get('/:id', async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  const category = await getCategory(+id);
+
+  return res.json(category);
 });
 
 export default router;
