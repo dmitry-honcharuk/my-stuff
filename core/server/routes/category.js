@@ -3,6 +3,7 @@ import {
   createCategory,
   getCategories,
   deleteCategoriesByIds,
+  updateCategory,
 } from '@core/services/Category';
 import {
   respondIfError,
@@ -34,6 +35,19 @@ router.delete('/', async (req, res) => {
 
   await deleteCategoriesByIds(ids);
   return res.json(null);
+});
+
+router.put('/:id', async (req, res) => {
+  const { name } = req.body;
+  const { id } = req.params;
+  const [updatedCategoriesCount] = await updateCategory({
+    name,
+    categoryId: id,
+  });
+
+  return updatedCategoriesCount === 0
+    ? res.status(400).json({ error: 'Invalid category' })
+    : res.json(null);
 });
 
 export default router;
