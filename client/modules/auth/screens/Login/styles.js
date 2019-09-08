@@ -1,7 +1,7 @@
-export default ({ spacing: { unit } }) => ({
+export default ({ spacing }) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: unit * 12,
+    marginTop: spacing(12),
   },
 });

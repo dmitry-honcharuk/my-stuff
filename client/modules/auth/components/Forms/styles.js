@@ -1,6 +1,6 @@
 import { darken } from '@material-ui/core/styles/colorManipulator';
 
-export default ({ spacing: { unit }, palette }) => ({
+export default ({ spacing, palette }) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -31,7 +31,7 @@ export default ({ spacing: { unit }, palette }) => ({
     fontWeight: 'normal',
   },
   actions: {
-    marginTop: unit,
+    marginTop: spacing(1),
     display: 'flex',
     justifyContent: 'flex-end',
   },

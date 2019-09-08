@@ -1,7 +1,7 @@
-export default ({ spacing: { unit }, breakpoints }) => ({
+export default ({ spacing, breakpoints }) => ({
   wrapper: {
     height: '100vh',
-    padding: unit * 5,
+    padding: spacing(5),
   },
   content: {
     display: 'flex',
