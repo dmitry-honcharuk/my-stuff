@@ -10,7 +10,7 @@
     "@core/services": "1.0.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
-    "http-proxy-middleware": "^0.19.1",
+    "http-proxy-middleware": "^0.20.0",
     "morgan": "^1.9.1"
   }
 }

@@ -1,6 +1,6 @@
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
-export default ({ spacing: { unit }, palette, mixins }) => ({
+export default ({ spacing, palette, mixins }) => ({
   wrapper: {
     height: '100%',
     backgroundPosition: 'center',
@@ -11,8 +11,8 @@ export default ({ spacing: { unit }, palette, mixins }) => ({
   },
   greetingContent: {
     ...mixins.gutters(),
-    paddingTop: unit,
-    paddingBottom: unit,
+    paddingTop: spacing(1),
+    paddingBottom: spacing(1),
     width: '100%',
     backgroundColor: fade(palette.background.paper, 0.5),
   },
