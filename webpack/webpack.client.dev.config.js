@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-require('../core/config/loaded-env');
+require('../common/config/loaded-env');
 
 module.exports = {
   mode: 'development',

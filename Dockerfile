@@ -4,13 +4,15 @@ WORKDIR /var/www/my-stuff
 
 COPY ./package.json ./
 COPY ./yarn.lock ./
+
+COPY ./common/config/package.json ./common/config/
+COPY ./common/constants/package.json ./common/constants/
+
 COPY ./client/app/package.json ./client/app/
 COPY ./client/common/package.json ./client/common/
 COPY ./client/modules/package.json ./client/modules/
 COPY ./client/utils/package.json ./client/utils/
 
-COPY ./core/config/package.json ./core/config/
-COPY ./core/constants/package.json ./core/constants/
 COPY ./core/middlewares/package.json ./core/middlewares/
 COPY ./core/migrations/package.json ./core/migrations/
 COPY ./core/models/package.json ./core/models/

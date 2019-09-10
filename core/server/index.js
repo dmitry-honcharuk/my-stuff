@@ -4,9 +4,7 @@ import cookieParser from 'cookie-parser';
 import proxy from 'http-proxy-middleware';
 import morgan from 'morgan';
 
-import { NODE_ENV } from '@core/config';
-
-import { COOKIE_SECRET, PORT, SITE_HOST, WDS_PORT } from '@core/config';
+import { COOKIE_SECRET, PORT, SITE_HOST, WDS_PORT } from '@common/config';
 
 import apiRoutes from './routes/api';
 

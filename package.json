@@ -24,6 +24,7 @@
     "migrate:undo:all": "sequelize db:migrate:undo:all"
   },
   "workspaces": [
+    "common/*",
     "core/*",
     "client/*"
   ],

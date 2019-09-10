@@ -1,4 +1,4 @@
-import { PERMISSIONS, USER_ROLES } from '@core/constants';
+import { PERMISSIONS, USER_ROLES } from '@common/constants';
 import {
   PermissionRepository,
   RolePermissionRepository,

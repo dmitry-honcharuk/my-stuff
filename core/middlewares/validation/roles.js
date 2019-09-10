@@ -1,6 +1,6 @@
 import { body } from 'express-validator/check';
 
-import { USER_ROLES } from '@core/constants';
+import { USER_ROLES } from '@common/constants';
 import { isSubsetOf } from '@core/utils/collection';
 
 const FIELD = 'roles';

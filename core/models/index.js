@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 
-import { DB } from '@core/config';
+import { DB } from '@common/config';
 
 const sequelize = new Sequelize(DB.database, DB.username, DB.password, {
   host: DB.host,

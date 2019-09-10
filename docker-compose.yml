@@ -29,12 +29,12 @@ services:
       - ${PORT}:${PORT}
     volumes:
       - /var/www/my-stuff/node_modules
+      - /var/www/my-stuff/packages/common/config/node_modules
+      - /var/www/my-stuff/packages/common/constants/node_modules
       - /var/www/my-stuff/packages/client/app/node_modules
       - /var/www/my-stuff/packages/client/common/node_modules
       - /var/www/my-stuff/packages/client/modules/node_modules
       - /var/www/my-stuff/packages/client/utils/node_modules
-      - /var/www/my-stuff/packages/core/config/node_modules
-      - /var/www/my-stuff/packages/core/constants/node_modules
       - /var/www/my-stuff/packages/core/middlewares/node_modules
       - /var/www/my-stuff/packages/core/migrations/node_modules
       - /var/www/my-stuff/packages/core/models/node_modules
@@ -43,6 +43,7 @@ services:
       - /var/www/my-stuff/packages/core/server/node_modules
       - /var/www/my-stuff/packages/core/services/node_modules
       - /var/www/my-stuff/packages/core/utils/node_modules
+      - ./common:/var/www/my-stuff/common:cached
       - ./client:/var/www/my-stuff/client:cached
       - ./core:/var/www/my-stuff/core:cached
       - ./public:/var/www/my-stuff/public:cached

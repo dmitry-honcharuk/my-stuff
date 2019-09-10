@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@core/config": "1.0.0",
-    "@core/constants": "1.0.0",
+    "@common/config": "1.0.0",
+    "@common/constants": "1.0.0",
     "@core/middlewares": "1.0.0",
     "@core/services": "1.0.0",
     "cookie-parser": "^1.4.4",

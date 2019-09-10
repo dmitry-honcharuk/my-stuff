@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { PERMISSIONS } from '@core/constants';
+import { PERMISSIONS } from '@common/constants';
 import withPermissions from '@core/middlewares/withPermissions';
 import {
   respondIfError,

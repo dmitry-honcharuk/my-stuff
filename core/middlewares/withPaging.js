@@ -1,4 +1,4 @@
-import { PAGING } from '@core/constants';
+import { PAGING } from '@common/constants';
 
 import { withOptionalPage, withOptionalPerPage } from './validation/paging';
 
