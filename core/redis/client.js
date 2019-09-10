@@ -1,6 +1,6 @@
 import redis from 'redis';
 
-import { REDIS_HOST, REDIS_PORT } from '@core/config';
+import { REDIS_HOST, REDIS_PORT } from '@common/config';
 
 const client = redis.createClient({
   host: REDIS_HOST,

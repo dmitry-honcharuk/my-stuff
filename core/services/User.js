@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import bcrypt from 'bcrypt-nodejs';
 
-import { USER_ROLES } from '@core/constants';
+import { USER_ROLES } from '@common/constants';
 import { dbTransaction } from '@core/utils';
 import {
   RoleRepository,

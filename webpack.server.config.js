@@ -10,7 +10,7 @@ module.exports = {
   entry: './core/server/index.js',
   externals: [
     nodeExternals({
-      whitelist: /^@core\//,
+      whitelist: /^@(common|core)\//,
     }),
   ],
   watch: true,

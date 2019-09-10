@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 
-import { IMAGES } from '@core/constants';
+import { IMAGES } from '@common/constants';
 
 import GreetingScreen from './GreetingScreen';
 
