@@ -1,6 +1,6 @@
 import { STATUS_CODES } from 'http';
 
-import { SESSION } from '@core/constants';
+import { SESSION } from '@common/constants';
 import { verifyToken } from '@core/services/Auth';
 
 import withToken from './withToken';
@@ -13,6 +13,7 @@ export default [
     try {
       const { user } = await verifyToken(token);
 
+      // eslint-disable-next-line require-atomic-updates
       req.user = user;
 
       return next();

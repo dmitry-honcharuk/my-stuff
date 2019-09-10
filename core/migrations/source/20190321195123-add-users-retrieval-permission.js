@@ -1,4 +1,4 @@
-import { PERMISSIONS } from '@core/constants';
+import { PERMISSIONS } from '@common/constants';
 import { PermissionRepository } from '@core/repositories';
 
 export const up = async () => {

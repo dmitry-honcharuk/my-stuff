@@ -1,5 +1,5 @@
 import { verify, sign } from 'jsonwebtoken';
-import { TOKEN_SECRET } from '@core/config';
+import { TOKEN_SECRET } from '@common/config';
 
 export const verifyToken = token => {
   return new Promise((resolve, reject) => {

@@ -5,8 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "@babel/register": "^7.6.0",
-    "@core/config": "1.0.0",
-    "@core/constants": "1.0.0",
+    "@common/config": "1.0.0",
+    "@common/constants": "1.0.0",
     "@core/repositories": "1.0.0"
   }
 }

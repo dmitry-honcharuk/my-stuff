@@ -1,4 +1,4 @@
-import { USER_ROLES } from '@core/constants';
+import { USER_ROLES } from '@common/constants';
 
 module.exports = {
   up: async queryInterface => {

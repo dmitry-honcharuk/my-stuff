@@ -2,7 +2,7 @@ import { withRouter } from 'react-router';
 import { compose, withProps } from 'recompose';
 import queryString from 'query-string';
 
-import { PAGING } from '@core/constants';
+import { PAGING } from '@common/constants';
 
 import { toNumber } from '@client/utils/number';
 

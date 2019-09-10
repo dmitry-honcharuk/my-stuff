@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { SESSION } from '@core/constants';
+import { SESSION } from '@common/constants';
 import * as UserService from '@core/services/User';
 import { createToken } from '@core/services/Auth';
 import withCurrentUser from '@core/middlewares/withCurrentUser';

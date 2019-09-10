@@ -1,6 +1,6 @@
 import { STATUS_CODES } from 'http';
 
-import { SESSION } from '@core/constants';
+import { SESSION } from '@common/constants';
 
 export default (req, res, next) => {
   const { [SESSION.COOKIE_NAME]: token } = req.signedCookies;
