@@ -3,18 +3,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-require('./core/config/loaded-env');
+require('../core/config/loaded-env');
 
 module.exports = {
   mode: 'development',
-  entry: ['@babel/polyfill', './client/app/index.js'],
+  entry: ['@babel/polyfill', path.resolve(__dirname, '../client/app/index.js')],
   devtool: 'eval',
   devServer: {
     public: `http://localhost:${process.env.PORT}`,
     overlay: true,
     port: process.env.WDS_PORT,
     historyApiFallback: true,
-    contentBase: path.resolve(__dirname, 'public'),
+    contentBase: path.resolve(__dirname, '../public'),
     clientLogLevel: 'info',
     publicPath: '/',
   },
@@ -50,8 +50,8 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, './public'),
-        to: path.resolve(__dirname, './static'),
+        from: path.resolve(__dirname, '../public'),
+        to: path.resolve(__dirname, '../dist/static'),
         toType: 'dir',
       },
     ]),

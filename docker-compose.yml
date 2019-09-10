@@ -22,7 +22,9 @@ services:
     volumes:
       - mysql-volume:/var/lib/mysql
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
     ports:
       - ${PORT}:${PORT}
     volumes:

@@ -9,6 +9,7 @@ export const {
   REDIS_HOST,
   REDIS_PORT,
   DB_PORT,
+  NODE_ENV,
 } = process.env;
 
 const { DB_USER, DB_PASS, DB_NAME, DB_HOST } = process.env;
