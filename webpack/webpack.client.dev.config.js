@@ -10,6 +10,8 @@ module.exports = {
   entry: ['@babel/polyfill', path.resolve(__dirname, '../client/app/index.js')],
   devtool: 'eval',
   devServer: {
+    host: '0.0.0.0',
+    disableHostCheck: true,
     public: `http://localhost:${process.env.PORT}`,
     overlay: true,
     port: process.env.WDS_PORT,

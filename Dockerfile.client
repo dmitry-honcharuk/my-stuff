@@ -1,0 +1,22 @@
+FROM node:dubnium-alpine
+
+WORKDIR /var/www/my-stuff
+
+COPY ./package.json ./
+COPY ./yarn.lock ./
+
+COPY ./common/config/package.json ./common/config/
+COPY ./common/constants/package.json ./common/constants/
+
+RUN yarn
+
+COPY ./client/app/package.json ./client/app/
+COPY ./client/common/package.json ./client/common/
+COPY ./client/modules/package.json ./client/modules/
+COPY ./client/utils/package.json ./client/utils/
+
+RUN yarn
+
+COPY ./ ./
+
+CMD [ "yarn", "start:client" ]

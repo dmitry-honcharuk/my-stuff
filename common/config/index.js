@@ -3,7 +3,7 @@ import './loaded-env';
 export const {
   PORT,
   WDS_PORT,
-  SITE_HOST,
+  CLIENT_HOST,
   COOKIE_SECRET,
   TOKEN_SECRET,
   REDIS_HOST,

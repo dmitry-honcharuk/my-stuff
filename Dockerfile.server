@@ -8,10 +8,7 @@ COPY ./yarn.lock ./
 COPY ./common/config/package.json ./common/config/
 COPY ./common/constants/package.json ./common/constants/
 
-COPY ./client/app/package.json ./client/app/
-COPY ./client/common/package.json ./client/common/
-COPY ./client/modules/package.json ./client/modules/
-COPY ./client/utils/package.json ./client/utils/
+RUN yarn
 
 COPY ./core/middlewares/package.json ./core/middlewares/
 COPY ./core/migrations/package.json ./core/migrations/
@@ -26,4 +23,4 @@ RUN yarn
 
 COPY ./ ./
 
-CMD [ "yarn", "start:app" ]
+CMD [ "yarn", "start:server" ]
