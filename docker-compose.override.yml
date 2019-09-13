@@ -13,7 +13,7 @@ services:
       - /var/www/my-stuff/packages/client/utils/node_modules
       - ./common:/var/www/my-stuff/common:cached
       - ./client:/var/www/my-stuff/client:cached
-  server:
+  api-server:
     volumes:
       - /var/www/my-stuff/node_modules
       - /var/www/my-stuff/packages/common/config/node_modules

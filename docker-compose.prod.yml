@@ -1,18 +1,23 @@
-version: "3"
+version: '3'
 services:
   nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
+    image: nginx
     ports:
       - 80:80
     volumes:
       - static:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - api-server
   client:
-    command: ["yarn", "build:client"]
+    build:
+      context: .
+      dockerfile: Dockerfile.client.prod
     volumes:
       - static:/var/www/my-stuff/dist
-  server:
-    command: ["yarn", "build:server"]
+  api-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server.prod
 volumes:
   static:
