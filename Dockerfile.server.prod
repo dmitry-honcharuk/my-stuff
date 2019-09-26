@@ -25,4 +25,6 @@ COPY ./ ./
 
 RUN yarn build:server
 
+RUN yarn migrate
+
 CMD [ "node", "src/index" ]
