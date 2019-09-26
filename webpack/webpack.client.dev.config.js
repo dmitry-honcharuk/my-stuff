@@ -16,7 +16,6 @@ module.exports = {
     overlay: true,
     port: process.env.WDS_PORT,
     historyApiFallback: true,
-    contentBase: path.resolve(__dirname, '../public'),
     clientLogLevel: 'info',
     publicPath: '/',
   },

@@ -31,8 +31,8 @@ services:
       dockerfile: Dockerfile.server
     environment:
       - CLIENT_HOST=http://client
-      - DB_HOST=http://db
-      - REDIS_HOST=http://redis
+      - DB_HOST=db
+      - REDIS_HOST=redis
     ports:
       - ${PORT}:${PORT}
     depends_on:

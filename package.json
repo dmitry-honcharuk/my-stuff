@@ -9,11 +9,12 @@
   "scripts": {
     "start": "yarn docker:up",
     "start:app": "concurrently -n=client,server -c=cyan,magenta \"yarn start:client\" \"yarn start:server\"",
-    "start:server": "webpack --config webpack/webpack.server.dev.config",
+    "start:server": "yarn migrate && webpack --config webpack/webpack.server.dev.config",
     "start:client": "webpack-dev-server -d --config webpack/webpack.client.dev.config",
     "build": "docker build -t dmitryhoncharuk/multi-client ./client",
     "build:server": "webpack --config webpack/webpack.server.prod.config",
     "build:client": "webpack --config webpack/webpack.client.prod.config",
+    "build:server:serve": "yarn migrate && node src/index.js",
     "docker:up": "docker-compose up",
     "docker:start": "docker-compose start",
     "docker:stop": "docker-compose stop",
