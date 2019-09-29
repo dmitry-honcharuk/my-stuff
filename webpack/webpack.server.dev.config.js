@@ -43,7 +43,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new RemoveWebpackPlugin('../src/'),
+    new RemoveWebpackPlugin(path.resolve(__dirname, '../src')),
     new NodemonPlugin(),
     new CaseSensitivePathsPlugin(),
   ],
