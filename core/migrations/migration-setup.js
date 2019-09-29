@@ -9,4 +9,8 @@ module.exports = () => ({
     ...DB,
     dialect: 'mysql',
   },
+  production: {
+    ...DB,
+    dialect: 'mysql',
+  },
 });

@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const RemoveWebpackPlugin = require('remove-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 require('../common/config/loaded-env');
@@ -39,6 +40,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new RemoveWebpackPlugin(path.resolve(__dirname, '../dist')),
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../public'),

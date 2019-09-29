@@ -40,7 +40,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [new RemoveWebpackPlugin('../src/'), new CaseSensitivePathsPlugin()],
+  plugins: [
+    new RemoveWebpackPlugin(path.resolve(__dirname, '../src')),
+    new CaseSensitivePathsPlugin(),
+  ],
   node: {
     console: false,
     process: false,

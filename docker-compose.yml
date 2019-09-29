@@ -25,6 +25,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.client
+    environment:
+      - NODE_ENV=development
   api-server:
     build:
       context: .
@@ -33,6 +35,7 @@ services:
       - CLIENT_HOST=http://client
       - DB_HOST=db
       - REDIS_HOST=redis
+      - NODE_ENV=development
     ports:
       - ${PORT}:${PORT}
     depends_on:
