@@ -1,24 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const RemoveWebpackPlugin = require('remove-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-require('./common/config/loaded-env');
+require('../common/config/loaded-env');
 
 module.exports = {
-  mode: 'development',
-  entry: ['@babel/polyfill', './client/app/index.js'],
-  devtool: 'eval',
-  devServer: {
-    public: `http://localhost:${process.env.PORT}`,
-    overlay: true,
-    port: process.env.WDS_PORT,
-    historyApiFallback: true,
-    contentBase: path.resolve(__dirname, 'public'),
-    clientLogLevel: 'info',
-    publicPath: '/',
-  },
+  mode: 'production',
+  entry: ['@babel/polyfill', path.resolve(__dirname, '../client/app/index.js')],
   output: {
+    path: path.resolve(__dirname, '../dist'),
     pathinfo: true,
     filename: 'static/index.js',
     chunkFilename: 'static/[name].chunk.js',
@@ -48,10 +40,11 @@ module.exports = {
     ],
   },
   plugins: [
+    new RemoveWebpackPlugin(path.resolve(__dirname, '../dist')),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, './public'),
-        to: path.resolve(__dirname, './static'),
+        from: path.resolve(__dirname, '../public'),
+        to: path.resolve(__dirname, '../dist/static'),
         toType: 'dir',
       },
     ]),

@@ -1,24 +1,22 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const RemoveWebpackPlugin = require('remove-webpack-plugin');
-const NodemonPlugin = require('nodemon-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   target: 'node',
-  entry: './core/server/index.js',
+  entry: path.resolve(__dirname, '../core/server/index.js'),
   externals: [
     nodeExternals({
       whitelist: /^@(common|core)\//,
     }),
   ],
-  watch: true,
   output: {
-    path: path.resolve(__dirname, 'src'),
+    path: path.resolve(__dirname, '../src'),
     filename: 'index.js',
   },
-  stats: 'minimal',
+  stats: 'normal',
   module: {
     rules: [
       {
@@ -43,8 +41,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new RemoveWebpackPlugin('./src/'),
-    new NodemonPlugin(),
+    new RemoveWebpackPlugin(path.resolve(__dirname, '../src')),
     new CaseSensitivePathsPlugin(),
   ],
   node: {

@@ -1,0 +1,26 @@
+version: "3"
+services:
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - api-server
+      - client
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client.prod
+    environment:
+      - NODE_ENV=production
+  api-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server.prod
+    environment:
+      - CLIENT_HOST=http://client
+      - DB_HOST=db
+      - REDIS_HOST=redis
+      - NODE_ENV=production
