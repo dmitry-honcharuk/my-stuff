@@ -21,7 +21,7 @@ app.use(json());
 
 app.use('/api', apiRoutes);
 
-if (NODE_ENV === 'develop') {
+if (NODE_ENV === 'development') {
   app.use(proxy({ target: `${CLIENT_HOST}:${WDS_PORT}`, changeOrigin: true }));
 }
 
