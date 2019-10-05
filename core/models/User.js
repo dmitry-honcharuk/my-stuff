@@ -1,30 +1,24 @@
-import { DataTypes } from 'sequelize';
-import sequelize from './index';
+import mongoose from 'mongoose';
 
-const User = sequelize.define(
-  'User',
-  {
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true,
-      },
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    indexes: [
-      {
-        unique: true,
-        fields: ['email'],
-      },
-    ],
-  },
-);
+import Role from './Role';
 
-export default User;
+export const UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  roles: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: Role,
+    },
+  ],
+  personalPermissions: [String],
+});
+
+export default mongoose.model('User', UserSchema);

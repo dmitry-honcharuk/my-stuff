@@ -50,7 +50,7 @@ module.exports = {
   node: {
     console: false,
     process: false,
-    __filename: false,
-    __dirname: false,
+    __filename: true,
+    __dirname: true,
   },
 };

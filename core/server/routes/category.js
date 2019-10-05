@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import {
   createCategory,
-  getCategories,
   deleteCategoriesByIds,
-  updateCategory,
+  getCategories,
   getCategory,
+  updateCategory,
 } from '@core/services/Category';
 import {
   respondIfError,
@@ -41,14 +41,13 @@ router.delete('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const { name } = req.body;
   const { id } = req.params;
-  const [updatedCategoriesCount] = await updateCategory({
+
+  await updateCategory({
     name,
     categoryId: id,
   });
 
-  return updatedCategoriesCount === 0
-    ? res.status(400).json({ error: 'Invalid category' })
-    : res.json(null);
+  return res.json(null);
 });
 
 router.get('/:id', async (req, res) => {
@@ -56,7 +55,7 @@ router.get('/:id', async (req, res) => {
     params: { id },
   } = req;
 
-  const category = await getCategory(+id);
+  const category = await getCategory(id);
 
   return res.json(category);
 });

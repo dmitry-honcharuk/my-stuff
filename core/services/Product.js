@@ -1,38 +1,38 @@
-import { ProductRepository } from '@core/repositories';
-import { Op } from 'sequelize';
+import { Product } from '@core/models';
 
-export const getProduct = id => ProductRepository.findByPk(id);
+export const getProduct = id => Product.findById(id);
+
+export const getProducts = ({ limit, offset }) =>
+  Product.find()
+    .skip(offset)
+    .limit(limit);
+
+export const countAll = () => Product.countDocuments();
 
 export const createProduct = ({ name, description, userId }) =>
-  ProductRepository.create({
+  Product.create({
     name,
     description,
-    UserId: userId,
+    user: userId,
   });
 
 export const updateProduct = ({ name, description, productId }) =>
-  ProductRepository.update(
+  Product.findOneAndUpdate(
+    { _id: productId },
     {
       name,
       description,
     },
-    {
-      where: {
-        id: productId,
-      },
-    },
   );
 
 export const deleteProductsByIds = ids =>
-  ProductRepository.destroy({ where: { id: ids } });
+  Product.deleteMany({ _id: { $in: ids } });
 
 export const isUserOwner = async (userId, productsIds) => {
-  const productsCount = await ProductRepository.count({
-    where: {
-      UserId: userId,
-      id: {
-        [Op.in]: productsIds,
-      },
+  const productsCount = await Product.countDocuments({
+    user: userId,
+    _id: {
+      $in: productsIds,
     },
   });
 

@@ -1,20 +1,13 @@
-import { Op } from 'sequelize';
 import bcrypt from 'bcrypt-nodejs';
+import flatMap from 'lodash/flatMap';
+import uniq from 'lodash/uniq';
 
 import { USER_ROLES } from '@common/constants';
-import { dbTransaction } from '@core/utils';
-import {
-  RoleRepository,
-  UserRepository,
-  UserRoleRepository,
-} from '@core/repositories';
 
-import { getUserPermissions } from './Permissions';
+import { Role, User } from '@core/models';
 
 export const isEmailTaken = async email => {
-  const usersCount = await UserRepository.count({
-    where: { email },
-  });
+  const usersCount = await User.countDocuments({ email });
 
   return usersCount !== 0;
 };
@@ -48,85 +41,44 @@ export const createUser = async ({
   roles: rolesList = [USER_ROLES.SELLER],
 }) => {
   const hashedPassword = await hashPassword(password, 10);
-  const roles = await RoleRepository.findAll({
-    attributes: ['id'],
-    where: {
-      name: {
-        [Op.in]: rolesList,
-      },
+
+  const roles = await Role.find({
+    name: {
+      $in: rolesList,
     },
   });
 
-  return dbTransaction(async transaction => {
-    const user = await UserRepository.create(
-      {
-        email,
-        password: hashedPassword,
-      },
-      { transaction },
-    );
-
-    await UserRoleRepository.bulkCreate(
-      roles.map(({ id }) => ({
-        UserId: user.id,
-        RoleId: id,
-      })),
-      { transaction },
-    );
-    return user;
+  return User.create({
+    email,
+    password: hashedPassword,
+    roles: roles.map(({ id }) => id),
   });
 };
 
 export const login = async ({ email, password }) => {
-  const user = await UserRepository.findOne({ where: { email } });
+  const user = await User.findOne({ email });
+
   if (!user) {
     throw new Error('User not found');
   }
   const isPasswordValid = await isPasswordSame(password, user.password);
-  if (isPasswordValid) {
-    return user;
+
+  if (!isPasswordValid) {
+    throw new Error('Wrong password');
   }
-};
 
-export const getUser = (id, query = {}) =>
-  UserRepository.findOne({
-    where: {
-      id,
-    },
-    ...query,
-  });
-
-export const getUserRoles = async userId => {
-  const roles = await RoleRepository.findAll({
-    attributes: ['name'],
-    include: [
-      {
-        model: UserRepository.getModel(),
-        where: {
-          id: userId,
-        },
-      },
-    ],
-  });
-
-  return roles.map(({ name }) => name);
+  return user;
 };
 
 export const serializeUser = async userId => {
-  const [user, roles, permissions] = await Promise.all([
-    getUser(userId, {
-      attributes: ['email'],
-    }),
-    getUserRoles(userId),
-    getUserPermissions(userId),
-  ]);
+  const user = await User.findById(userId).populate('roles');
+  const rolePermissions = flatMap(user.roles, ({ permissions }) => permissions);
 
   return {
-    id: userId,
+    id: user.id,
     email: user.email,
-    roles,
-    permissions,
+    permissions: uniq([...rolePermissions, ...user.personalPermissions]),
   };
 };
 
-export const getUsers = () => UserRepository.findAll();
+export const getUsers = () => User.find();
