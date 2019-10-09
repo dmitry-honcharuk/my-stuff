@@ -7,20 +7,17 @@ services:
       - ${REDIS_PORT}:6379
     volumes:
       - redis-volume:/data
-  db:
-    container_name: "db-server"
-    image: "mysql:5.7"
-    command: --default-authentication-plugin=mysql_native_password
+  mongodb:
+    container_name: "mongo-server"
+    image: "bitnami/mongodb:latest"
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASS}
     ports:
-      - ${DB_PORT}:3306
+      - ${DB_PORT}:27017
     volumes:
-      - mysql-volume:/var/lib/mysql
+      - mongodb-volume:/bitnami
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
   client:
     build:
       context: .
@@ -33,14 +30,15 @@ services:
       dockerfile: Dockerfile.server
     environment:
       - CLIENT_HOST=http://client
-      - DB_HOST=db
+      - DB_HOST=mongodb
       - REDIS_HOST=redis
       - NODE_ENV=development
     ports:
       - ${PORT}:${PORT}
     depends_on:
-      - db
       - redis
+      - mongodb
 volumes:
   redis-volume:
   mysql-volume:
+  mongodb-volume:

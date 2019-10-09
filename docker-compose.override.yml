@@ -22,7 +22,6 @@ services:
       - /var/www/my-stuff/packages/core/migrations/node_modules
       - /var/www/my-stuff/packages/core/models/node_modules
       - /var/www/my-stuff/packages/core/redis/node_modules
-      - /var/www/my-stuff/packages/core/repositories/node_modules
       - /var/www/my-stuff/packages/core/server/node_modules
       - /var/www/my-stuff/packages/core/services/node_modules
       - /var/www/my-stuff/packages/core/utils/node_modules
