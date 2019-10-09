@@ -3,6 +3,8 @@ import cookieParser from 'cookie-parser';
 import proxy from 'http-proxy-middleware';
 import morgan from 'morgan';
 
+import '@core/models/config/connection';
+
 import {
   COOKIE_SECRET,
   PORT,

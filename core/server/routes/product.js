@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import {
+  countAll,
   createProduct,
   deleteProductsByIds,
   getProduct,
+  getProducts,
   updateProduct,
 } from '@core/services/Product';
-import { ProductRepository } from '@core/repositories';
 import withCurrentUser from '@core/middlewares/withCurrentUser';
 import withPaging from '@core/middlewares/withPaging';
 import {
@@ -24,17 +25,14 @@ router.get(
   respondIfError,
   async (req, res) => {
     const { limit, offset } = req.paging;
-    const products = await ProductRepository.findAll({
-      offset,
-      limit,
-    });
+    const products = await getProducts({ limit, offset });
 
     return res.json(products);
   },
 );
 
 router.get('/count', withCurrentUser, respondIfError, async (req, res) => {
-  const total = await ProductRepository.count();
+  const total = await countAll();
   return res.json({ total });
 });
 
@@ -61,7 +59,7 @@ router.get('/:id', withCurrentUser, respondIfError, async (req, res) => {
     params: { id },
   } = req;
 
-  const product = await getProduct(+id);
+  const product = await getProduct(id);
 
   return res.json(product);
 });
@@ -87,15 +85,13 @@ router.put(
   async (req, res) => {
     const { name, description } = req.body;
     const { id } = req.params;
-    const [updatedProductsCount] = await updateProduct({
+    await updateProduct({
       name,
       description,
       productId: id,
     });
 
-    return updatedProductsCount === 0
-      ? res.status(400).json({ error: 'Invalid product' })
-      : res.json(null);
+    return res.json(null);
   },
 );
 

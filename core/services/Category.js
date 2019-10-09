@@ -1,29 +1,24 @@
-import { CategoryRepository } from '@core/repositories';
+import { Category } from '@core/models';
 
 export const createCategory = name =>
-  CategoryRepository.create({
+  Category.create({
     name,
   });
 
 export const getCategories = ({ offset, limit }) =>
-  CategoryRepository.findAll({
-    offset,
-    limit,
-  });
+  Category.find()
+    .skip(offset)
+    .limit(limit);
 
 export const deleteCategoriesByIds = ids =>
-  CategoryRepository.destroy({ where: { id: ids } });
+  Category.deleteMany({ _id: { $in: ids } });
 
 export const updateCategory = ({ name, categoryId }) =>
-  CategoryRepository.update(
+  Category.findOneAndUpdate(
+    { _id: categoryId },
     {
       name,
     },
-    {
-      where: {
-        id: categoryId,
-      },
-    },
   );
 
-export const getCategory = id => CategoryRepository.findByPk(id);
+export const getCategory = id => Category.findById(id);

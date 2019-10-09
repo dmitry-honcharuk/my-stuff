@@ -3,10 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "migrations:create": "migrate create --migrations-dir source --template-file ./template.js --compiler=\"js:./migration-setup\"",
+    "migrations:up": "migrate up --migrations-dir source --compiler=\"js:./migration-setup\"",
+    "migrations:down": "migrate down --migrations-dir source --compiler=\"js:./migration-setup\""
+  },
   "dependencies": {
-    "@babel/register": "^7.6.0",
+    "@babel/core": "^7.6.2",
+    "@babel/register": "^7.6.2",
     "@common/config": "1.0.0",
     "@common/constants": "1.0.0",
-    "@core/repositories": "1.0.0"
+    "@core/models": "1.0.0",
+    "migrate": "^1.6.2"
   }
 }

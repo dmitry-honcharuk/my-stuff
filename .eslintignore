@@ -2,3 +2,5 @@ node_modules/*
 
 dist/*
 src/*
+
+core/migrations/template.js

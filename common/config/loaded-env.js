@@ -1,3 +1,7 @@
-const { config } = require('dotenv');
+const path = require('path');
+const { load } = require('dotenv-extended');
 
-module.exports = config();
+module.exports = load({
+  errorOnMissing: true,
+  path: path.resolve(__dirname, '../../.env'),
+});

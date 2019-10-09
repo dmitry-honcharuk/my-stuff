@@ -9,20 +9,19 @@
   "scripts": {
     "start": "yarn docker:up",
     "start:app": "concurrently -n=client,server -c=cyan,magenta \"yarn start:client\" \"yarn start:server\"",
-    "start:server": "yarn migrate && webpack --config webpack/webpack.server.dev.config",
+    "start:server": "yarn migrations:up && webpack --config webpack/webpack.server.dev.config",
     "start:client": "webpack-dev-server -d --config webpack/webpack.client.dev.config",
     "build": "docker build -t dmitryhoncharuk/multi-client ./client",
-    "build:server": "webpack --config webpack/webpack.server.prod.config",
+    "build:server": "yarn migrations:up && webpack --config webpack/webpack.server.prod.config",
     "build:client": "webpack --config webpack/webpack.client.prod.config",
-    "build:server:serve": "yarn migrate && node src/index.js",
+    "build:server:serve": "node src/index.js",
     "docker:up": "docker-compose up",
     "docker:start": "docker-compose start",
     "docker:stop": "docker-compose stop",
     "docker:down": "docker-compose down",
-    "migration:generate": "sequelize migration:generate --name",
-    "migrate": "sequelize db:migrate",
-    "migrate:undo": "sequelize db:migrate:undo",
-    "migrate:undo:all": "sequelize db:migrate:undo:all"
+    "migrations:create": "yarn workspace @core/migrations migrations:create",
+    "migrations:up": "yarn workspace @core/migrations migrations:up",
+    "migrations:down": "yarn workspace @core/migrations migrations:down"
   },
   "workspaces": [
     "common/*",
@@ -40,7 +39,8 @@
     ]
   },
   "dependencies": {
-    "@babel/core": "^7.6.0",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
@@ -63,7 +63,6 @@
     "nodemon-webpack-plugin": "^4.1.1",
     "prettier": "^1.18.2",
     "remove-webpack-plugin": "^1.2.2",
-    "sequelize-cli": "^5.5.1",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.8.0",
