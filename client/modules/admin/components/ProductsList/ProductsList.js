@@ -13,7 +13,7 @@ const propTypes = {
   page: PropTypes.number,
   products: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       description: PropTypes.string,
     }),
@@ -27,11 +27,6 @@ const defaultProps = {
 };
 
 const COLUMNS = [
-  {
-    title: '#ID',
-    key: 'id',
-    dataIndex: 'id',
-  },
   {
     title: 'Title',
     key: 'name',
