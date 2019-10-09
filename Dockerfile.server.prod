@@ -14,7 +14,6 @@ COPY ./core/middlewares/package.json ./core/middlewares/
 COPY ./core/migrations/package.json ./core/migrations/
 COPY ./core/models/package.json ./core/models/
 COPY ./core/redis/package.json ./core/redis/
-COPY ./core/repositories/package.json ./core/repositories/
 COPY ./core/server/package.json ./core/server/
 COPY ./core/services/package.json ./core/services/
 COPY ./core/utils/package.json ./core/utils/
