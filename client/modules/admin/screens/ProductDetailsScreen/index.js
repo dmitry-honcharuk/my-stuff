@@ -22,7 +22,7 @@ const propTypes = {
 
 const ProductDetailsScreen = ({ productId, product, fetchProductDetails }) => {
   useEffect(() => {
-    fetchProductDetails(+productId);
+    fetchProductDetails(productId);
   }, [fetchProductDetails, productId]);
 
   return (

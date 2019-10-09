@@ -19,26 +19,22 @@ const defaultProps = {
   value: null,
 };
 
-const DataField = ({ name, label, isEdit }) => {
+const DataField = ({ name, label, isEdit, ...props }) => {
   const classes = useStyles();
+
   return (
-    <div className={classes.root}>
-      <div className={classes.header}>
-        <label htmlFor={name} className={classes.label}>
-          {label}
-        </label>
-      </div>
-      <Field
-        component={OutlinedInput}
-        id={name}
-        name={name}
-        margin="dense"
-        labelWidth={0}
-        classes={{ root: classes.field, disabled: classes.disabledField }}
-        disabled={!isEdit}
-        fullWidth
-      />
-    </div>
+    <Field
+      component={OutlinedInput}
+      id={name}
+      name={name}
+      margin="dense"
+      label={label}
+      labelWidth={0}
+      classes={{ root: classes.field, disabled: classes.disabledField }}
+      disabled={!isEdit}
+      fullWidth
+      {...props}
+    />
   );
 };
 

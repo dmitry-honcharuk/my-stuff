@@ -18,6 +18,11 @@ export default [
       label: 'Products',
       icon: <ShoppingCart fontSize="inherit" />,
     },
+    {
+      link: '/products/new',
+      label: 'New Product',
+      icon: <AddIcon fontSize="inherit" />,
+    },
   ],
   [
     {

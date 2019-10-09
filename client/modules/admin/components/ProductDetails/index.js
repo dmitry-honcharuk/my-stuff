@@ -9,11 +9,8 @@ import pick from 'lodash/pick';
 import hideIf from '@client/utils/hoc/hideIf';
 
 import EditableDetails from '@client/common/EditableDetails';
-import {
-  getProductDetails,
-  getProductEditMode,
-  getProductFields,
-} from '../../state/selectors';
+import { getProductDetails, getProductEditMode } from '../../state/selectors';
+import { getProductFeildList } from '../../utils';
 
 import { PRODUCT_DETAILS_FORM } from '../../constants';
 
@@ -21,7 +18,7 @@ import { updateProduct } from '../../state/operations';
 
 const propTypes = {
   product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
   productFields: PropTypes.arrayOf(
     PropTypes.shape({
@@ -42,7 +39,8 @@ const ProductDetails = ({
   updateProduct,
   handleSubmit,
 }) => {
-  const { id: productId } = product;
+  const { _id: productId } = product;
+
   const onSubmit = useCallback(
     handleSubmit(values => updateProduct(productId, values)),
     [productId, updateProduct, handleSubmit],
@@ -73,7 +71,7 @@ export default compose(
   ),
   hideIf(({ product }) => isEmpty(product)),
   withProps(({ product }) => ({
-    productFields: getProductFields(product),
+    productFields: getProductFeildList(product, ['name', 'description']),
     initialValues: pick(product, ['name', 'description']),
   })),
   reduxForm({

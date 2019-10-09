@@ -80,6 +80,7 @@ router.delete(
 router.put(
   '/:id',
   withCurrentUser,
+  withRequiredNameField,
   shouldBeProductOwner,
   respondIfError,
   async (req, res) => {

@@ -11,6 +11,7 @@ import {
   ProductDetails,
   Products,
   Users,
+  CreateProduct,
 } from '@client/modules/admin';
 
 import history from './history';
@@ -20,6 +21,11 @@ const Routes = () => (
     <Switch>
       <PrivateRoute path="/" exact render={() => <AdminRoot />} />
       <PrivateRoute path="/products" exact render={() => <Products />} />
+      <PrivateRoute
+        path="/products/new"
+        exact
+        render={() => <CreateProduct />}
+      />
       <PrivateRoute
         path="/products/:productId"
         exact

@@ -1,5 +1,8 @@
 import axios from 'axios';
 import queryString from 'query-string';
+import { push } from 'connected-react-router';
+
+import handleFormErrors from '@client/utils/helpers/handleFormErrors';
 
 import {
   productDeleted,
@@ -19,6 +22,7 @@ import {
   productUpdated,
   productUpdateFailed,
   productUpdateStarted,
+  productCreateStarted,
 } from './actions';
 
 export const fetchProducts = ({ page = 1, perPage = 10 }) => async dispatch => {
@@ -70,8 +74,9 @@ export const updateProduct = (productId, productFields) => async dispatch => {
       productFields,
     );
     dispatch(productUpdated(productFields));
-  } catch ({ response: { data } }) {
-    dispatch(productUpdateFailed(data));
+  } catch (error) {
+    dispatch(productUpdateFailed(error));
+    handleFormErrors(error);
   }
 };
 
@@ -87,5 +92,17 @@ export const removeProduct = productId => async dispatch => {
     dispatch(productDeleted(productId, { redirect: '/products' }));
   } catch ({ response: { data } }) {
     dispatch(productDeleteFailed(data));
+  }
+};
+
+export const createProduct = productFields => async dispatch => {
+  dispatch(productCreateStarted());
+
+  try {
+    const { data: product } = await axios.post('/api/products', productFields);
+
+    dispatch(push(`/products/${product._id}`));
+  } catch (error) {
+    handleFormErrors(error);
   }
 };

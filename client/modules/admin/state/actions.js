@@ -1,3 +1,5 @@
+import { createAction } from '@client/utils/state';
+
 import {
   COUNT_PRODUCTS_FAILURE,
   COUNT_PRODUCTS_PENDING,
@@ -17,6 +19,8 @@ import {
   PRODUCT_UPDATE_PENDING,
   PRODUCT_UPDATE_SUCCESS,
 } from './types';
+
+const adminAction = createAction('ADMIN');
 
 export const productsFetched = payload => ({
   type: GET_PRODUCTS_SUCCESS,
@@ -98,3 +102,5 @@ export const productDeleteFailed = error => ({
   type: PRODUCT_DELETE_FAILURE,
   payload: error,
 });
+
+export const productCreateStarted = adminAction('CREATE_PRODUCT/PENDING');

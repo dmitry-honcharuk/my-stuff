@@ -31,8 +31,8 @@ const COLUMNS = [
     title: 'Title',
     key: 'name',
     dataIndex: 'name',
-    render: ({ id, name }) => (
-      <Link component={RouterLink} to={`/products/${id}`}>
+    render: ({ _id, name }) => (
+      <Link component={RouterLink} to={`/products/${_id}`}>
         {name}
       </Link>
     ),
