@@ -17,6 +17,7 @@ const propTypes = {
       name: PropTypes.string.isRequired,
       label: PropTypes.node.isRequired,
       value: PropTypes.node.isRequired,
+      validate: PropTypes.arrayOf(PropTypes.func),
     }),
   ),
   actions: PropTypes.node,
@@ -39,7 +40,12 @@ const EditableDetails = ({ onSubmit, dataSet, actions, isEdit }) => {
     <form onSubmit={onSubmit}>
       {dataSet.map(item => (
         <Paper key={item.name} className={classes.root}>
-          <DataField name={item.name} label={item.label} isEdit={isEdit} />
+          <DataField
+            name={item.name}
+            label={item.label}
+            isEdit={isEdit}
+            validate={item.validate}
+          />
         </Paper>
       ))}
       {isEdit && (

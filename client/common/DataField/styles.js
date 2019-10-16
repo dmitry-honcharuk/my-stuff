@@ -7,14 +7,20 @@ export default ({ palette }) => ({
     flexDirection: 'column',
   },
   header: {
+    color: palette.primary.main,
+    fontSize: 15,
     display: 'flex',
     justifyContent: 'space-between',
   },
   label: {
-    fontSize: 15,
-    color: palette.primary.main,
     textTransform: 'capitalize',
     cursor: 'pointer',
+  },
+  errorMessage: {
+    fontSize: 13,
+  },
+  errorColor: {
+    color: palette.error.light,
   },
   value: {},
   field: {

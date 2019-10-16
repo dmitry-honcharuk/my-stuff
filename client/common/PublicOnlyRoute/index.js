@@ -6,7 +6,7 @@ import withCurrentUser from '@client/utils/hoc/withCurrentUser';
 
 const propTypes = {
   user: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
   }).isRequired,
   redirectTo: PropTypes.string,
 };

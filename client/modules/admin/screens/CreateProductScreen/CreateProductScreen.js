@@ -2,9 +2,11 @@ import React from 'react';
 
 import Page from '../../components/Page';
 
+import CreateProductForm from '../../components/CreateProductForm';
+
 const Root = () => (
-  <Page title="Create Product">
-    <h1>Create Product page</h1>
+  <Page title="New Product">
+    <CreateProductForm />
   </Page>
 );
 

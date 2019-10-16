@@ -17,7 +17,7 @@ const propTypes = {
   pagination: PropTypes.node,
 };
 const defaultProps = {
-  dataKey: 'id',
+  dataKey: '_id',
   data: [],
   noDataMessage: 'No data provided for this list.',
   pagination: null,

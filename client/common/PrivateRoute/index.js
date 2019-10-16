@@ -8,7 +8,7 @@ import { Sidebar } from '@client/modules/admin';
 const propTypes = {
   render: PropTypes.func.isRequired,
   user: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
   }).isRequired,
   redirectTo: PropTypes.string,
 };
