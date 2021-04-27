@@ -5,6 +5,6 @@
   "license": "MIT",
   "dependencies": {
     "@common/config": "1.0.0",
-    "redis": "^2.8.0"
+    "redis": "^3.1.1"
   }
 }
